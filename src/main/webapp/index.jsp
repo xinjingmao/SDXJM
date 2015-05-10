@@ -16,6 +16,6 @@
   </head>
   
   <body>
-    This is my JSP page. 123测试123<br>
+    This is my JSP page. 123测试123test<br>
   </body>
 </html>
