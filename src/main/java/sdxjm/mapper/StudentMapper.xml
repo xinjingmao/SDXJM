@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="sdxjm.mapper.StudentMapper">  
+
+    <!-- sql的 id必须和接口中的方法名一样  -->  
+    <select id="getUser" parameterType="int" resultType="User">  
+        select * from user where id=#{id} limit 1 
+    </select> 
+    <select id="getAllStudent" parameterType="Student" resultType="Student">  
+        SELECT * FROM student LIMIT #{start},#{len} 
+    </select>
+    <select id="getStuTotalNum" resultType="int">  
+        SELECT count(1) FROM student 
+    </select>
+    <insert id="addStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO student(
+				id
+			  ,name
+			  ,sex
+			  ,tel
+			  ,qqNum
+			  ,province
+			  ,city
+			  ,area
+			  ,school
+			  ,college
+			  ,major
+			  ,grade
+			  ,classes
+			  ,position
+			  ,agentId
+			  ,addTime
+			)
+		VALUES(
+				#{id}
+			  , #{name}
+			  , #{sex}
+			  , #{tel}
+			  , #{qqNum}
+			  , #{province}
+			  , #{city}
+			  , #{area}
+			  , #{school}
+			  , #{college}
+			  , #{major}
+			  , #{grade}
+			  , #{classes}
+			  , #{position}
+			  , #{agentId}
+			  , #{addTime}
+
+			)
+    </insert>
+</mapper>
+
+  
