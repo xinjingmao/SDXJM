@@ -46,7 +46,6 @@ public class LoginFilter extends OncePerRequestFilter {
 							"您已经太长时间没有操作,请刷新页面");
 					return;
 				}
-				System.out.println("登陆拦截器----");
 				response.sendRedirect("/admin/toLogin");
 				return;
 			} else {
