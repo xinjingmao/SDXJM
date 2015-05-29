@@ -6,8 +6,8 @@
 <mapper namespace="sdxjm.mapper.StudentMapper">  
 
     <!-- sql的 id必须和接口中的方法名一样  -->  
-    <select id="getUser" parameterType="int" resultType="User">  
-        select * from user where id=#{id} limit 1 
+    <select id="getOne" parameterType="int" resultType="Student">  
+        select * from student where id=#{id} 
     </select> 
     <select id="getAllStudent" parameterType="Student" resultType="Student">  
         SELECT * FROM student LIMIT #{start},#{len} 
@@ -54,6 +54,107 @@
 
 			)
     </insert>
+    
+    <update id="editStudent" parameterType="Student">
+    	UPDATE student SET 
+    		  name = #{name}
+			  ,sex = #{sex}
+			  ,tel = #{tel}
+			  ,qqNum = #{qqNum}
+			  ,province = #{province}
+			  ,city = #{city}
+			  ,area = #{area}
+			  ,school = #{school}
+			  ,college = #{college}
+			  ,major = #{major}
+			  ,grade = #{grade}
+			  ,classes = #{classes}
+			  ,position = #{position}
+		WHERE id = #{id}
+    </update>
+    
+    <delete id="delStudent" parameterType="int">
+    	DELETE FROM student WHERE id = #{id}
+    </delete>
+    
+    <select id="getSomeStudent" parameterType="Student" resultType="Student">  
+        SELECT * FROM student 
+        <where>
+        <if test="province != '全部'">
+        	province = #{province}
+        </if>
+        <if test="city != '全部'">
+        	AND city = #{city}
+        </if>
+        <if test="area != '全部'">
+        	AND area = #{area}
+        </if>
+        <if test="school != '全部'">
+        	AND school = #{school}
+        </if>
+        <if test="college != '全部'">
+        	AND college = #{college}
+        </if>
+        <if test="major != '全部'">
+        	AND major = #{major}
+        </if>
+        <if test="grade != '' and grade != '全部'">
+        	AND grade = #{grade}
+        </if>
+        <if test="classes != ''">
+        	AND classes = #{classes}
+        </if>
+        <if test="position != ''">
+        	AND position = #{position}
+        </if>
+        <if test="name != ''">
+        	AND name = #{name}
+        </if>
+        <if test="tel != ''">
+        	AND tel = #{tel}
+        </if>
+        </where>
+        LIMIT #{start},#{len} 
+    </select>
+    
+    <select id="getSomeStuNum" parameterType="Student" resultType="int">  
+        SELECT count(1) FROM student 
+        <where>
+        <if test="province != '全部'">
+        	province = #{province}
+        </if>
+        <if test="city != '全部'">
+        	AND city = #{city}
+        </if>
+        <if test="area != '全部'">
+        	AND area = #{area}
+        </if>
+        <if test="school != '全部'">
+        	AND school = #{school}
+        </if>
+        <if test="college != '全部'">
+        	AND college = #{college}
+        </if>
+        <if test="major != '全部'">
+        	AND major = #{major}
+        </if>
+        <if test="grade != '' and grade != '全部'">
+        	AND grade = #{grade}
+        </if>
+        <if test="classes != ''">
+        	AND classes = #{classes}
+        </if>
+        <if test="position != ''">
+        	AND position = #{position}
+        </if>
+        <if test="name != ''">
+        	AND name = #{name}
+        </if>
+        <if test="tel != ''">
+        	AND tel = #{tel}
+        </if>
+        </where>
+    </select>
 </mapper>
 
   

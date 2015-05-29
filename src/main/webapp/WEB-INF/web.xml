@@ -29,18 +29,10 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<!-- <servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.jpg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.css</url-pattern>
-	</servlet-mapping> -->
+	<!-- <servlet-mapping> <servlet-name>default</servlet-name> <url-pattern>*.jpg</url-pattern> 
+		</servlet-mapping> <servlet-mapping> <servlet-name>default</servlet-name> 
+		<url-pattern>*.js</url-pattern> </servlet-mapping> <servlet-mapping> <servlet-name>default</servlet-name> 
+		<url-pattern>*.css</url-pattern> </servlet-mapping> -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>classpath:log/log4j.properties</param-value>
@@ -60,8 +52,16 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>sdxjm.utils.web.LoginFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<welcome-file-list>

@@ -13,4 +13,12 @@ public interface IStudentService {
 	 * @return
 	 */
 	int getStuTotalNum();
+	
+	Student getOne(int id);
+
+	ServiceResult editStudent(Student s);
+
+	void delStudent(int id);
+
+	QuerySummary getSomeStudentByPage(Student s);
 }

@@ -2,108 +2,110 @@
  * 控制div的显示和隐藏
  */
 
-$(function(){
+/*$(function(){
 	base.run();
-});    
+}); */   
 
 var base ={
-	run:function(){
-		base._init_();
-		base._event_();
-		},
-		
-	_init_:function(){
-		$("#query_winaward_div").hide();
-		$("#query_accept_div").hide();
-	},	
+	/*addOption : function (cmb, str, obj){
+			var option = document.createElement("OPTION");
+			cmb.options.add(option);
+			option.innerHTML = str;
+			option.value = str;
+			option.obj = obj;
+		},*/
 	
-	_event_:function(){
-		//控制活动div的显示与隐藏
-		$("#query_activity").click(function(){
-			base._checkout1();		
-		});
-		
-		//控制参与活动div的显示与隐藏
-		$("#query_award").click(function(){
-			base._checkout2();
-		});
-		
-		//控制接受推荐div的显示与隐藏
-		$("#query_accept").click(function(){
-			base._checkout3();		
-		});
-		
-		//控制获奖详情div的显示与隐藏
-		$("#query_winaward").click(function(){
-			base._checkout4();
-		});
-		
-		//控制获奖详情div的显示与隐藏
-		$("#act_mode_set").click(function(){
-			base._checkout5();
-		});
-	},
-	
-	_checkout1:function(){
-		//控制活动详情的显示
-		if($("#query_activity_div").css("display")=="none"){
-			$("#query_activity_div").css("display","block");
-			$("#query_award_div").css("display","none");
-			$("#query_winaward_div").css("display","none");
-			$("#query_accept_div").css("display","none");
-			$("#act_mode_set_div").css("display","none");
-		}
-	},
-	
-	_checkout2:function(){
-		//控制参与活动的显示
-		if($("#query_award_div").css("display")=="none"){
-			$("#query_award_div").css("display","block");
-			$("#query_activity_div").css("display","none");
-			$("#query_winaward_div").css("display","none");
-			$("#query_accept_div").css("display","none");
-			$("#act_mode_set_div").css("display","none");
-		}
-	},
-	_checkout3:function(){
-		//控制接受推荐的显示
-		if($("#query_accept_div").css("display")=="none"){
-			$("#query_accept_div").css("display","block");
-			$("#query_award_div").css("display","none");
-			$("#query_activity_div").css("display","none");
-			$("#query_winaward_div").css("display","none");
-			$("#act_mode_set_div").css("display","none");
-		}
-	},
-	
-	_checkout4:function(){
-		//控制获奖的显示
-		if($("#query_winaward_div").css("display")=="none"){
-			$("#query_winaward_div").css("display","block");
-			$("#query_award_div").css("display","none");
-			$("#query_activity_div").css("display","none");
-			$("#query_accept_div").css("display","none");
-			$("#act_mode_set_div").css("display","none");
-		}
-	},
-	
-	_checkout5:function(){
-		//控制活动模板设置的显示
-			$("#act_mode_set_div").css("display","block");
-			$("#query_winaward_div").css("display","none");
-			$("#query_award_div").css("display","none");
-			$("#query_activity_div").css("display","none");
-			$("#query_accept_div").css("display","none");
-	},
-	
-	switchDiv : function(d1,d2,d3,d4,d5){
+	switchDiv : function(d1,d2,d3,d4,d5,d6){
 		if($(d1).css("display")=="none"){
 			$(d1).css("display","block");
 			$(d2).css("display","none");
 			$(d3).css("display","none");
 			$(d4).css("display","none");
 			$(d5).css("display","none");
+			$(d6).css("display","none");
 		}
+	},
+	
+	schoolInit : function(_cmbSchool, _cmbCollege, _cmbMajor, schoolList, defaultSchool, defaultCollege, defaultMajor){
+		//清空选项子节点
+		$("#"+_cmbSchool+",#"+_cmbCollege+",#"+_cmbMajor).empty();
+		
+		var cmbSchool = document.getElementById(_cmbSchool);
+		var cmbCollege = document.getElementById(_cmbCollege);
+		var cmbMajor = document.getElementById(_cmbMajor);
+		
+		function cmbSelect(cmb, str)
+		{
+			for(var i=0; i<cmb.options.length; i++)
+			{
+				if(cmb.options[i].value == str)
+				{
+					cmb.selectedIndex = i;
+					return;
+				}
+			}
+		}
+		
+		function cmbAddOption(cmb, str, obj)
+		{
+			var option = document.createElement("OPTION");
+			cmb.options.add(option);
+			option.innerHTML = str;
+			option.value = str;
+			option.obj = obj;
+		}
+		
+		function changeCollege()
+		{
+			cmbMajor.options.length = 0;
+			if(cmbCollege.selectedIndex == -1)return;
+			var item = cmbCollege.options[cmbCollege.selectedIndex].obj;
+			cmbAddOption(cmbMajor, '全部', null);
+			if(item.majors){
+				for(var i=0; i<item.majors.length; i++)
+				{
+					cmbAddOption(cmbMajor, item.majors[i].name, null);
+				}
+			}
+			
+			cmbSelect(cmbMajor, defaultMajor);
+		}
+		function changeSchool()
+		{
+			cmbCollege.options.length = 0;
+			cmbCollege.onchange = null;
+			if(cmbSchool.selectedIndex == -1)return;
+			
+			var item = cmbSchool.options[cmbSchool.selectedIndex].obj;
+			cmbAddOption(cmbCollege, '全部', {});
+			if(item.colleges){
+				for(var i=0; i<item.colleges.length; i++)
+				{
+					cmbAddOption(cmbCollege, item.colleges[i].name, item.colleges[i]);
+				}
+			}
+			cmbSelect(cmbCollege, defaultCollege);
+			//if(flag != 'col'){
+				changeCollege();
+				cmbCollege.onchange = changeCollege;
+			//}
+			
+		}
+		
+		cmbAddOption(cmbSchool, '全部', {});
+		if(schoolList.length){
+			for(var i=0; i<schoolList.length; i++)
+			{
+				cmbAddOption(cmbSchool, schoolList[i].name, schoolList[i]);
+			}
+		}
+		
+		cmbSelect(cmbSchool, defaultSchool);
+		//if(flag != 'sch'){
+			changeSchool();
+			cmbSchool.onchange = changeSchool;
+		//}
+		
 	},
 };
 

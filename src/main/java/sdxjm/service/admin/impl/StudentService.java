@@ -44,4 +44,34 @@ public class StudentService extends BaseService implements IStudentService {
 		return stuMapper.getStuTotalNum();
 	}
 
+	@Override
+	public Student getOne(int id) {
+		// TODO Auto-generated method stub
+		return stuMapper.getOne(id);
+	}
+
+	@Override
+	public ServiceResult editStudent(Student s) {
+		String msg = s.verify();
+		if(!msg.equals("success")){
+			return failI18nResult(msg);
+		}
+		stuMapper.editStudent(s);
+		return successI18nResult("success.student.editStudent");
+	}
+
+	@Override
+	public void delStudent(int id) {
+		// TODO Auto-generated method stub
+		stuMapper.delStudent(id);
+	}
+
+	@Override
+	public QuerySummary getSomeStudentByPage(Student s) {
+		int total = stuMapper.getSomeStuNum(s);
+		QuerySummary qs = new QuerySummary(total, s);
+		qs.setStuList(stuMapper.getSomeStudent(s));
+		return qs;
+	}
+
 }

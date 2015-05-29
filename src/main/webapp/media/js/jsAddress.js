@@ -1,6 +1,5 @@
-﻿// 纯JS省市区三级联动
-// 2011-11-30 by http://www.cnblogs.com/zjfree
-var addressInit = function(_cmbProvince, _cmbCity, _cmbArea, defaultProvince, defaultCity, defaultArea)
+﻿var addressInit = function(_cmbProvince, _cmbCity, _cmbArea, school,college,major,
+		defaultProvince, defaultCity, defaultArea, defaultSchool, defaultCollege, defaultMajor)
 {
 	var cmbProvince = document.getElementById(_cmbProvince);
 	var cmbCity = document.getElementById(_cmbCity);
@@ -27,17 +26,43 @@ var addressInit = function(_cmbProvince, _cmbCity, _cmbArea, defaultProvince, de
 		option.obj = obj;
 	}
 	
+	function changeArea()
+	{
+		var data = ['province=', cmbProvince.value
+		            , '&city=', cmbCity.value
+		            , '&area=', cmbArea.value
+		            ].join("");
+		if(/全部/.test(data)){
+			base.schoolInit(school,college,major,{});
+		}else{
+			$.post("/sch/some",data,function(result){
+				var schoolList = result;
+				base.schoolInit(school,college,major,schoolList, defaultSchool, defaultCollege, defaultMajor);
+	  	  	},"json");
+		}
+		
+	}
+	
 	function changeCity()
 	{
 		cmbArea.options.length = 0;
 		if(cmbCity.selectedIndex == -1)return;
 		var item = cmbCity.options[cmbCity.selectedIndex].obj;
-		for(var i=0; i<item.areaList.length; i++)
-		{
-			cmbAddOption(cmbArea, item.areaList[i], null);
+		cmbAddOption(cmbArea, '全部', null);
+		if(item.areaList){
+			for(var i=0; i<item.areaList.length; i++)
+			{
+				cmbAddOption(cmbArea, item.areaList[i], null);
+			}
 		}
 		cmbSelect(cmbArea, defaultArea);
+		if(school != null){
+			changeArea();
+			cmbArea.onchange = changeArea;
+		}
+		
 	}
+	
 	function changeProvince()
 	{
 		cmbCity.options.length = 0;
@@ -45,32 +70,31 @@ var addressInit = function(_cmbProvince, _cmbCity, _cmbArea, defaultProvince, de
 		if(cmbProvince.selectedIndex == -1)return;
 		
 		var item = cmbProvince.options[cmbProvince.selectedIndex].obj;
-		for(var i=0; i<item.cityList.length; i++)
-		{
-			cmbAddOption(cmbCity, item.cityList[i].name, item.cityList[i]);
+		cmbAddOption(cmbCity, '全部', {});
+		if(item.cityList){
+			for(var i=0; i<item.cityList.length; i++)
+			{
+				cmbAddOption(cmbCity, item.cityList[i].name, item.cityList[i]);
+			}
 		}
 		cmbSelect(cmbCity, defaultCity);
 		changeCity();
 		cmbCity.onchange = changeCity;
 	}
-	
+	cmbAddOption(cmbProvince, '全部', {});
 	for(var i=0; i<provinceList.length; i++)
 	{
 		cmbAddOption(cmbProvince, provinceList[i].name, provinceList[i]);
 	}
+	
 	cmbSelect(cmbProvince, defaultProvince);
 	changeProvince();
 	cmbProvince.onchange = changeProvince;
 }
 
-function show(p,c,a){
-	var cmbProvince = document.getElementById(p);
-	var cmbCity = document.getElementById(c);
-	var cmbArea = document.getElementById(a);
-	alert(cmbProvince.value + cmbCity.value + cmbArea.value)
-}
 
 var provinceList = [
+//{name:'全部',cityList:[{name:'全部',areaList:['全部']}]},                    
 {name:'北京', cityList:[		   
 {name:'市辖区', areaList:['东城区','西城区','崇文区','宣武区','朝阳区','丰台区','石景山区','海淀区','门头沟区','房山区','通州区','顺义区','昌平区','大兴区','怀柔区','平谷区']},		   
 {name:'县', areaList:['密云县','延庆县']}

@@ -16,21 +16,21 @@ public class Student extends QueryParams{
 	private String name;
 	/** 性别 */
 	private int sex;
-	/** 学校 */
+	/** 学院 */
 	private String college;
-	/** 学校 */
+	/** 专业 */
 	private String major;
-	/** 学校 */
+	/** 入学年份 */
 	private String grade;
-	/** 学校 */
+	/** 班级 */
 	private String classes;
-	/** 学校 */
+	/** 职位 */
 	private String position;
-	/** 学校 */
+	/** 省 */
 	private String province;
-	/** 学校 */
+	/** 市 */
 	private String city;
-	/** 学校 */
+	/** 区 */
 	private String area;
 	/** 手机号码 */
 	private String tel;
@@ -153,34 +153,34 @@ public class Student extends QueryParams{
 		if(StringUtil.isEmpty(this.tel)){
 			return "error.student.telError";
 		}
-		if(StringUtil.isEmpty(this.qqNum)){
+		if(StringUtil.isEmpty1(this.qqNum)){
 			return "error.student.qqNumError";
 		}
-		if(StringUtil.isEmpty(this.province)){
+		if(StringUtil.isEmpty1(this.province)){
 			return "error.student.provinceError";
 		}
-		if(StringUtil.isEmpty(this.city)){
+		if(StringUtil.isEmpty1(this.city)){
 			return "error.student.cityError";
 		}
-		if(StringUtil.isEmpty(this.area)){
+		if(StringUtil.isEmpty1(this.area)){
 			return "error.student.areaError";
 		}
-		if(StringUtil.isEmpty(this.school)){
+		if(StringUtil.isEmpty1(this.school)){
 			return "error.student.schoolError";
 		}
-		if(StringUtil.isEmpty(this.college)){
+		if(StringUtil.isEmpty1(this.college)){
 			return "error.student.collegeError";
 		}
-		if(StringUtil.isEmpty(this.major)){
+		if(StringUtil.isEmpty1(this.major)){
 			return "error.student.majorError";
 		}
-		if(StringUtil.isEmpty(this.grade)){
+		if(StringUtil.isEmpty1(this.grade)){
 			return "error.student.gradeError";
 		}
-		if(StringUtil.isEmpty(this.classes)){
+		if(StringUtil.isEmpty1(this.classes)){
 			return "error.student.classesError";
 		}
-		if(StringUtil.isEmpty(this.position)){
+		if(StringUtil.isEmpty1(this.position)){
 			return "error.student.positionError";
 		}
 		//判断参数格式

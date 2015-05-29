@@ -74,6 +74,15 @@ public class StringUtil {
     }
 
     /**
+     * 判断字符串是否为 null 或 空 或错误字符
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty1(String str) {
+    	return str == null || str.equals("") || str.equals("null") || str.equals("(null)") || str.equals("全部");
+    }
+    /**
      * 经过 trim 后是否为空
      * 
      * @param str

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="sdxjm.mapper.ManagerMapper">  
+
+    <!-- sql的 id必须和接口中的方法名一样  -->  
+    <select id="checkExist" parameterType="String" resultType="Manager">  
+        select * from manager where tel = #{tel} 
+    </select> 
+    <select id="getAllManager" parameterType="Manager" resultType="Manager">  
+        SELECT id,tel,addTime FROM manager 
+    </select>
+    <select id="getStuTotalNum" resultType="int">  
+        SELECT count(1) FROM manager 
+    </select>
+    <insert id="addManager" parameterType="Manager" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO manager(
+				id
+			  ,tel
+			  ,password
+			  ,extra
+			  ,addTime
+			)
+		VALUES(
+				#{id}
+			  , #{tel}
+			  , #{password}
+			  , #{extra}
+			  , #{addTime}
+			)
+    </insert>
+    
+    <update id="changepwd" parameterType="Manager">
+    	UPDATE manager SET password = #{password}
+		WHERE tel = #{tel}
+    </update>
+    
+    <delete id="delManager" parameterType="int">
+    	DELETE FROM manager WHERE id = #{id}
+    </delete>
+    
+
+</mapper>
+
+  

@@ -1,0 +1,35 @@
+li {
+	list-style: outside none none;
+}
+
+#add_college_div,#add_major_div {
+	float: left;
+	padding: 5px;
+	height:180px;
+}
+
+#col_list_div,#maj_list_div {
+float: left;
+margin-left: 10px;
+padding-left: 20px;
+border-left: 3px solid #666;
+min-height: 250px;
+}
+
+
+#update_col_div {
+margin-top: 15px;
+padding-top: 5px;
+border-top: 2px dotted #D7CACA;
+}
+
+.majorlist{
+padding-top: 5px;
+padding-bottom: 15px;
+}
+
+#col_list_div span,#maj_list_div span{
+display:inline-block; 
+width: 180px;
+margin-top: 5px;
+}
