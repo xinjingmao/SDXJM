@@ -19,9 +19,9 @@
 		<th>入学年份</th>
 		<th>班级</th>
 		<th>职位</th>
-		<th>录入人</th>
 		<th>添加时间</th>
-		<th>备注信息</th>
+		<#--<th>录入人</th>
+		<th>备注信息</th>--> 
 		<th>操作</th>
   	</tr>
     <#list summary.stuList as stu>
@@ -41,9 +41,9 @@
         <td>${stu.grade}</td>
         <td>${stu.classes}</td>
         <td>${stu.position}</td>
-        <td>${stu.agentId}</td>
         <td>${stu.addTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-        <td>${stu.remark}</td>   
+        <#-- <td>${stu.agentId}</td>
+        <td>${stu.remark}</td>  --> 
         <td>
         <input name="submit" type="image" value="ee" src="${imageRoot}/index_alter_1.png" class="toEdit" id="${stu.id}" />
         <input name="submit" type="image" value="ee" src="${imageRoot}/index_delete.png" class="delstu" id="id=${stu.id}" />
