@@ -25,9 +25,10 @@ var admin = {
     	bz.jsonPost(url, data, function(result){    		
     		if(result.success){
     			//redirect
+    			alert("登陆成功！");
     			bz.util.redirect("/stu/index");
     		}else{
-    			$("#login_result_div").html(result.message);
+    			alert(result.message);
     		}
     	});
     },
