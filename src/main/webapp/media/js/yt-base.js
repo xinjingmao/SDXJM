@@ -705,7 +705,7 @@ bz.nav = {
 		var as = [];
 		for ( var i = start; i <= end; i++) {
 			if(i == current){
-				as.push("<li><span class='disabled'>" + i + "</span></li>");
+				as.push("<li class='active'><a href=\"#\">" + i + "<span class='sr-only'>(current)</span></a></li>");
 			}else{
 				as.push(this._bootstrap_gen_one_anchor(i));
 			}
@@ -779,9 +779,12 @@ bz.nav = {
 		var nextPage = (page + 1) > totalPage ? "" : (page + 1);
 		
 		
-		return ["<a href='", url, "' page='",prePage, "' class='middle_page_prev'></a>",
+//		return ["<a href='", url, "' page='",prePage, "' class='middle_page_prev'></a>",
+//		        "<span><strong>", page, "</strong>/", totalPage,
+//		        "</span><a href='", url, "' page='",nextPage, "' class='middle_page_next'></a>"].join("");		
+		return ["<a href='", url, "' page='",prePage, "'></a>",
 		        "<span><strong>", page, "</strong>/", totalPage,
-		        "</span><a href='", url, "' page='",nextPage, "' class='middle_page_next'></a>"].join("");		
+		        "</span><a href='", url, "' page='",nextPage, "'></a>"].join("");
 	},
 	genbootstrapstyle: function(acount, len, page, url){
 		var nav = this._amend_nav_params(acount, len, page, url);
@@ -798,12 +801,12 @@ bz.nav = {
 		var prePage = (page - 1) > 0 ? (page - 1) : "";
 		var nextPage = (page + 1) > totalPage ? "" : (page + 1);
 		
-		var navArr = ["<ul>"];
+		var navArr = ["<nav><ul class='pagination'>"];
 		
 		if(page > 1){
-			navArr.push(this._bootstrap_gen_one_anchor(page - 1, "上一页"));			
+			navArr.push(this._bootstrap_gen_one_anchor(page - 1, "&laquo;"));			
 		}else{
-			navArr.push("<li class='disabled'><a href=\"#\">上一页</a></li>");
+			navArr.push("<li class='disabled'><a href=\"#\" aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
 		}
 		
 		if(totalPage <= max){
@@ -837,9 +840,9 @@ bz.nav = {
 		}
 		
 		if(page < totalPage){
-			navArr.push(this._bootstrap_gen_one_anchor(page + 1, "下一页"));				
+			navArr.push(this._bootstrap_gen_one_anchor(page + 1, "&raquo;"));				
 		}else{			
-			navArr.push("<li class='disabled'><a href='#'>下一页</a></li></ul>");
+			navArr.push("<li class='disabled'><a href=\"#\" aria-label='Previous'><span aria-hidden='true'>&raquo;</span></a></li></ul></nav>");
 		}
 		
 		var all = navArr.join("");	

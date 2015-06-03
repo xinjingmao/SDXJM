@@ -8,7 +8,7 @@
    * Date:      2011-3-2
 
 ----------------------------------------------------------------------- */
-*{word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;}
+/**{word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;}
 body,textarea,pre,input{font: 12px/1.5 '微软雅黑','宋体','Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;}
 a:focus{outline:1px dotted;}
 hr{border:0 #ccc solid;border-top-width:1px;clear:both;height:0;}
@@ -34,7 +34,7 @@ del{text-decoration:line-through;}
 table{border-collapse:collapse;border-spacing:0;border:none;text-align:center;}
 table td{word-break:break-all;word-wrap:break-word;}
 a{text-decoration:none;color:#0092D2}
-a:hover{text-decoration:underline;color:#f90}
+a:hover{text-decoration:underline;color:#f90}*/
 
 /* util class */
 .cl{clear:both;}
@@ -43,7 +43,7 @@ a:hover{text-decoration:underline;color:#f90}
 .text-left{text-align:left;}
 .text-right{text-align:right;}
 .text-center{text-align:center;}
-.hide{display:none;}
+.list_hide{display:none;}
 hr.gray{border:1px solid #ccc;}
 .float_ul{float:left;}
 .float_ul li{float:left; margin:2px 15px 2px 0;display:inline;white-space:nowrap;}
@@ -527,11 +527,12 @@ p.share span{
 }
 .tiny_prev:hover {background-position:-1px -15px;cursor:pointer;}
 .tiny_next:hover {background-position:-16px -15px;cursor:pointer;}
-/* normal page*/
+/* normal page
 .page {
     text-align: left;
 	height:28px;
 	line-height:28px;
+	margin-top:10px;
 }
 .page li {
 	float:left;
@@ -574,7 +575,7 @@ p.share span{
     color: #666;
     padding: 2px 6px;
     margin: 2px;
-}
+}*/
 /* end of page nav */
 
 #appinfo_table {
@@ -673,12 +674,12 @@ table.color th {
 	line-height:16px;
 	border-right:1px solid #ccc;
     border-bottom:1px solid #ccc;
+    text-align:center;
 }
 table.color tr td {
     background-color: #FFFFFF;
     color: #3D3D3D;
     padding: 6px;
-    vertical-align: top;
 	max-width:260px;
 	min-width:45px;
 	border-right:1px solid #ccc;

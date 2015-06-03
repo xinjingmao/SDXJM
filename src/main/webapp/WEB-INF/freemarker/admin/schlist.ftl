@@ -1,5 +1,3 @@
-<p class="page navigator"></p>
-<div class="hide navigatorJson">${(summary.navigator.htmlJson)!''}</div>
 <#if summary.navigator.acount &gt; 0>
 <div>
 	学校总数：<span id="totalNum">${summary.navigator.acount}</span>
@@ -24,9 +22,9 @@
         <td>${sch.province}</td>
         <td>${sch.city}</td>
         <td>${sch.area}</td>
-        <td><input type="text" id="sN${sch.id}" value="${sch.name}"></td>
-        <td><button class="listcol" value="id=${sch.id}&name=${sch.name}">学院列表</button></td>
-        <td><button class="listmaj" value="id=${sch.id}&name=${sch.name}">专业列表</button></td>
+        <td><input class="form-control input-sm" type="text" id="sN${sch.id}" value="${sch.name}"></td>
+        <td><button class="listcol btn btn-default btn-xs" value="id=${sch.id}&name=${sch.name}">学院列表</button></td>
+        <td><button class="listmaj btn btn-default btn-xs" value="id=${sch.id}&name=${sch.name}">专业列表</button></td>
         <td>${sch.addTime?string("yyyy-MM-dd HH:mm:ss")}</td>
         <td><a class="changeName" id="${sch.id}">修改校名</a> | <a class="delsch" id="id=${sch.id}">删除</a></td>
        </tr>
@@ -35,4 +33,5 @@
 <#else>
     <p>no recores</p>
 </#if>
-
+<p class="page navigator"></p>
+<div class="hide navigatorJson">${(summary.navigator.htmlJson)!''}</div>

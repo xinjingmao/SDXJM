@@ -9,6 +9,7 @@ var schmgr = {
 	},
 
 	_init_ : function() {
+		schmgr.getAllschool();
 	},
 
 	_event_ : function() {

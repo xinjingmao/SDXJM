@@ -1,3 +1,4 @@
+
 <#if summary.navigator.acount &gt; 0>
 <div>
 	学生总数：<span id="totalNum">${summary.navigator.acount}</span>

@@ -109,3 +109,11 @@ var base ={
 	},
 };
 
+function logout(){
+	var f = confirm("确认退出吗？");
+	if(!f){
+		return;
+	}
+	
+	window.location.href = "/admin/logout";
+};

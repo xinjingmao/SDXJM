@@ -1,16 +1,14 @@
-li {
-	list-style: outside none none;
-}
 
-#add_college_div,#add_major_div {
+/*#add_college_div,#add_major_div {
 	float: left;
 	padding: 5px;
 	height:180px;
-}
+}*/
 
 #col_list_div,#maj_list_div {
 float: left;
 margin-left: 10px;
+margin-top:10px;
 padding-left: 20px;
 border-left: 3px solid #666;
 min-height: 250px;
