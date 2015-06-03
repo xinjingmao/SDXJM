@@ -42,7 +42,7 @@
 				</div>
 				<div class="row">
 					<div class="span4 center">
-						<input type="button" id="change_password_btn" class="btn btn-success" value="添&nbsp; &nbsp;加" />
+						<input type="button" id="change_password_btn" class="btn btn-success" value="确&nbsp; &nbsp;定" />
 					</div>
 				</div>
             </form>

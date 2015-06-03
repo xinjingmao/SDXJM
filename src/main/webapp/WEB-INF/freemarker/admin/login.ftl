@@ -17,7 +17,7 @@
                     <label><input name="tel" class="txt_user" type="text" placeholder="手机号码" tabindex="1"/></label>
                 </div>
                 <div class="l_message_password">
-                    <label><input name="password" type="password" placeholder="密 码" tabindex="2"/></label>
+                    <label><input id="password" name="password" type="password" placeholder="密 码" tabindex="2"/></label>
                 </div>
             </form>
             <div class="l_message_login">

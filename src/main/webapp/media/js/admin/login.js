@@ -25,7 +25,6 @@ var admin = {
     	bz.jsonPost(url, data, function(result){    		
     		if(result.success){
     			//redirect
-    			alert("登陆成功！");
     			bz.util.redirect("/stu/index");
     		}else{
     			alert(result.message);
