@@ -19,4 +19,5 @@ public interface ManagerMapper {
 
 	void delManager(int id);
 
+
 }

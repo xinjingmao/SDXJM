@@ -44,4 +44,6 @@ public interface SchoolMapper {
 	int getSomeSchNum(School s);
 
 	List<School> getSomeSchByPage(School s);
+
+	School checkSchExit(School s);
 }

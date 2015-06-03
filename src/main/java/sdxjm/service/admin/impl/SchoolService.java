@@ -15,17 +15,23 @@ import sdxjm.mapper.SchoolMapper;
 import sdxjm.service.admin.ISchoolService;
 import sdxjm.utils.web.BaseService;
 import sdxjm.utils.web.ServiceResult;
+
 @Service("schoolService")
 public class SchoolService extends BaseService implements ISchoolService {
 	@Autowired
 	@Qualifier("schoolMapper")
 	private SchoolMapper schMapper;
-	
+
 	@Override
 	public ServiceResult addSchool(School s) {
 		String msg = s.verify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
+		}
+		// 检查学校是否已存在
+		School sc = schMapper.checkSchExit(s);
+		if (sc != null) {
+			return failI18nResult("error.school.schoolExist");
 		}
 		s.setAddTime(new Date());
 		schMapper.addSchool(s);
@@ -53,13 +59,13 @@ public class SchoolService extends BaseService implements ISchoolService {
 	@Override
 	public ServiceResult addCollege(College c) {
 		String msg = c.verify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
 		}
 		// 检查学院是否已存在
 		College f = schMapper.checkColExit(c);
-		if(f != null){
-			return failI18nResult("error.school.collegeExit");
+		if (f != null) {
+			return failI18nResult("error.school.collegeExist");
 		}
 		c.setAddTime(new Date());
 		schMapper.addCollege(c);
@@ -81,17 +87,17 @@ public class SchoolService extends BaseService implements ISchoolService {
 	@Override
 	public ServiceResult addMajor(Major m) {
 		String msg = m.verify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
 		}
 		// 检查专业是否已存在
 		Major f = schMapper.checkMajExit(m);
 		if (f != null) {
-			return failI18nResult("error.school.majorExit");
+			return failI18nResult("error.school.majorExist");
 		}
 		m.setAddTime(new Date());
 		schMapper.addMajor(m);
-		return successI18nResult("success.school.addMajor"); 
+		return successI18nResult("success.school.addMajor");
 	}
 
 	@Override
@@ -115,7 +121,7 @@ public class SchoolService extends BaseService implements ISchoolService {
 	@Override
 	public ServiceResult changeSName(School s) {
 		schMapper.changeSName(s);
-		return successI18nResult("success.school.changeSName"); 
+		return successI18nResult("success.school.changeSName");
 	}
 
 	@Override

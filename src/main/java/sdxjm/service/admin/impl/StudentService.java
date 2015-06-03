@@ -1,7 +1,6 @@
 package sdxjm.service.admin.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,17 +12,23 @@ import sdxjm.mapper.StudentMapper;
 import sdxjm.service.admin.IStudentService;
 import sdxjm.utils.web.BaseService;
 import sdxjm.utils.web.ServiceResult;
+
 @Service("studentService")
 public class StudentService extends BaseService implements IStudentService {
 	@Autowired
 	@Qualifier("studentMapper")
 	private StudentMapper stuMapper;
-	
+
 	@Override
 	public ServiceResult addStudent(Student s) {
 		String msg = s.verify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
+		}
+		// 检查学生是否已存在
+		Student s1 = stuMapper.checkStuExit(s);
+		if (s1 != null) {
+			return failI18nResult("error.student.stutelExist");
 		}
 		s.setAddTime(new Date());
 		stuMapper.addStudent(s);
@@ -53,7 +58,7 @@ public class StudentService extends BaseService implements IStudentService {
 	@Override
 	public ServiceResult editStudent(Student s) {
 		String msg = s.verify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
 		}
 		stuMapper.editStudent(s);

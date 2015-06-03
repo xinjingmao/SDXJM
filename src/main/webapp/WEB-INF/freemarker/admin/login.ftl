@@ -21,7 +21,7 @@
                 </div>
             </form>
             <div class="l_message_login">
-                <p><button id="admin_login_a" onclick="javascript:;">登陆</button>&nbsp; &nbsp;<a href="#">忘记密码？</a></p>
+                <p><button id="admin_login_a" onclick="javascript:;">登陆</button></p>
             </div>
         </div>
         <div class="l_img">

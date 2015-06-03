@@ -9,6 +9,10 @@
     <select id="getOne" parameterType="int" resultType="Student">  
         select * from student where id=#{id} 
     </select> 
+    
+    <select id="checkStuExit" parameterType="Student" resultType="Student">  
+        select id from student where tel = #{tel} 
+    </select>
     <select id="getAllStudent" parameterType="Student" resultType="Student">  
         SELECT * FROM student LIMIT #{start},#{len} 
     </select>

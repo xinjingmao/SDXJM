@@ -61,7 +61,7 @@ var manager = {
 					$("#manager_list_div").html(result);
 				});
 			} else {
-				$("#create_manager_result_div").html(result.message);
+				alert(result.message);
 			}
 		});
 	},

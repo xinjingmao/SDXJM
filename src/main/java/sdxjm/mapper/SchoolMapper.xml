@@ -165,6 +165,12 @@
         </if>
         </where>
     </select>
+    
+    <select id="checkSchExit" parameterType="School" resultType="School">  
+        SELECT id FROM school
+        WHERE province = #{province} AND city = #{city} AND area = #{area}
+        AND name = #{name}
+    </select>
 </mapper>
 
   

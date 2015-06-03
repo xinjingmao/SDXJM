@@ -11,7 +11,6 @@ import sdxjm.domain.Manager;
 import sdxjm.mapper.ManagerMapper;
 import sdxjm.service.admin.IManagerService;
 import sdxjm.utils.EncryptUtil;
-import sdxjm.utils.StringUtil;
 import sdxjm.utils.web.BaseService;
 import sdxjm.utils.web.ServiceResult;
 
@@ -28,12 +27,18 @@ public class ManagerService extends BaseService implements IManagerService {
 		if (!msg.equals("success")) {
 			return failI18nResult(msg);
 		}
+		// 检查管理员是否已存在
+		Manager m1 = mgrMapper.checkExist(m.getTel());
+		if (m1 != null) {
+			return failI18nResult("error.manager.managerExisted");
+		}
+
 		int temp = (int) (Math.random() * 10000);
 		while (temp < 999) {
 			temp = (int) (Math.random() * 10000);
 		}
 		m.setExtra(temp);
-		m.setPassword(getPassword("123456"+temp));
+		m.setPassword(getPassword("123456" + temp));
 		m.setAddTime(new Date());
 		mgrMapper.addManager(m);
 		return successI18nResult("success.manager.addManager");
@@ -52,11 +57,11 @@ public class ManagerService extends BaseService implements IManagerService {
 		if (admin == null) {
 			return failI18nResult("error.manager.adminNotExists");
 		}
-		String p = getPassword(manager.getPassword()+admin.getExtra());
-		if(!p.equals(admin.getPassword())){
+		String p = getPassword(manager.getPassword() + admin.getExtra());
+		if (!p.equals(admin.getPassword())) {
 			return failI18nResult("error.manager.adminNotExists");
 		}
-		
+
 		return successObjectResult(admin);
 	}
 
@@ -67,11 +72,11 @@ public class ManagerService extends BaseService implements IManagerService {
 	@Override
 	public ServiceResult changepwd(Manager manager) {
 		String msg = manager.changePsdVerify();
-		if(!msg.equals("success")){
+		if (!msg.equals("success")) {
 			return failI18nResult(msg);
 		}
 		Manager m = mgrMapper.checkExist(manager.getTel());
-		manager.setPassword(getPassword(manager.getPassword()+m.getExtra()));
+		manager.setPassword(getPassword(manager.getPassword() + m.getExtra()));
 		mgrMapper.changepwd(manager);
 		return successI18nResult("success.manager.operationSuccess");
 	}

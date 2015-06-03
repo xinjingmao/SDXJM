@@ -24,4 +24,6 @@ public interface StudentMapper {
 	int getSomeStuNum(Student s);
 
 	List<Student> getSomeStudent(Student s);
+
+	Student checkStuExit(Student s);
 }
