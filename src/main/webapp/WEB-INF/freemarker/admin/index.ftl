@@ -8,9 +8,11 @@
 <title>学生录入系统</title>
 <#include "/admin/include/admin-css.html">  
 <link rel="stylesheet" href="${cssRoot}/bootstrap.min.css" type="text/css" />
+<link rel="shortcut icon" href="${imageRoot}/bitbug_favicon.ico" />
 </head>
 
 <body>
+<div id="my_shade"></div>
   <div id="admin_container" class="i_frame">  
 	    <!-- background-->
 	  	<div class="i_frame_bg">
@@ -105,7 +107,8 @@
 								<div class="span4">
 									<div class="input-group dis">
 										<span class="input-group-addon">入学年份:</span>
-									  	<input name="grade" id="grade" type="text" value="" class="form-control" placeholder="请输入学生的入学年份">
+										<select name="grade" id="grade" class="form-control"></select>
+									  	<#--<input name="grade" id="grade" type="text" value="" class="form-control" placeholder="请输入学生的入学年份">-->
 									</div>
 								</div>
 							</div>
@@ -131,8 +134,36 @@
 								<div class="span3">
 									<button id="add_btn" class="btn btn-success">添&nbsp; &nbsp;加</button>
 								</div>
+								<div class="span3">
+									<button id="tobatch_btn" class="btn btn-success">批量导入</button>
+								</div>
 						</div>
 		        </div><!-- end of add_student_div -->
+		        
+		        <div id="batch_div">
+		        	<div class="batch_hander">
+			            <h2>批量导入</h2>
+			            <a href="javascript:;" id="batch_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+			        </div>
+					<div class="batch_content">
+			            <form method="post" id="batch_form">
+			                <div class="row">
+			                    <div class="span_BFB form-group">
+			                        <input type="file" id="batchInputFile">
+			                        <p><a href="#">点击下载模板</a></p>
+			                    </div>
+			                </div>
+			            </form>
+			            <div class="row btn_bottom">
+			                <div class="span2">
+			                	<button id="batch_btn" class="btn btn-success">批量导入</button>
+			                </div>
+			                <div class="span2">
+			                    <button id="close_btn" class="btn btn-success">取&nbsp; &nbsp;消</button>
+			                </div>
+			            </div>
+			        </div>
+		        </div><!-- end of batch_div -->
 		            
 		        <div id="list_student_div" class="u_content">
 		            <form id="query_stu_form">
@@ -152,7 +183,7 @@
 						  <div class="span1"><p>专&nbsp; &nbsp;业</p></div>
 						  <div class="span2"><select name="major" id="major1" class="form-control"></select></div>
 						  <div class="span1"><p>入学年份</p></div>
-						  <div class="span2"><input type="text" name="grade" id="grade1" class="form-control"/></div>
+						  <div class="span2"><select name="grade" id="grade1" class="form-control"></select></div>
 						  <div class="span1"><p>班&nbsp; &nbsp;级</p></div>
 						  <div class="span4"><input type="text" name="classes" id="classes1" class="form-control"/></div>
 						</div>
@@ -171,7 +202,7 @@
 		            <div id="stu_list_div"></div>
 		        </div><!-- end of list_student_div -->
 		        
-		        <div id="edit_student_div" class="u_content list_hide">
+		        <div id="edit_student_div" class="u_content add list_hide">
 						<form id="edit_student_form">
 						<input type="hidden" name="id" id="stuId" value="">
 						<div class="row">
@@ -253,7 +284,7 @@
 								<div class="span4">
 									<div class="input-group dis">
 										<span class="input-group-addon">入学年份:</span>
-									  	<input name="grade" id="grade2" type="text" value="" class="form-control" placeholder="请输入学生的入学年份">
+									  	<select name="grade" id="grade2" class="form-control"></select>
 									</div>
 								</div>
 							</div>

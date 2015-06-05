@@ -12,6 +12,9 @@ var stumgr = {
 		//$("#query_award_btn").click();
 		//stumgr.getSomeSch();
 		stumgr.getAllStudent();
+		stumgr.setOption("grade");
+		stumgr.setOption("grade1");
+		stumgr.setOption("grade2");
 	},
 
 	_event_ : function() {
@@ -54,6 +57,58 @@ var stumgr = {
 		$("#query_somestu_btn").click(function() {
 			stumgr.getSomeStudent();
 		});
+		
+		//批量导入
+		$("#tobatch_btn").click(function() {
+			stumgr.showBatchBox();
+		});
+		
+		$("#batch_close").click(function() {
+			stumgr.hideBatchBox();
+		});
+		
+		$("#close_btn").click(function() {
+			stumgr.hideBatchBox();
+		});
+		
+		$("#batch_btn").click(function() {
+			var file = $("#batchInputFile").val();
+			if(file != ""){
+				if(!/.(xls|xlsx|xlsm)$/.test(file.toLowerCase())){
+					alert("文件类型不是Excel文件!");
+					return false;
+				}else{
+					alert("批量导入成功");
+					stumgr.hideBatchBox();
+				}
+			}else{
+				alert("请选择您要导入的文件!");
+			}
+		});
+		
+		window.addEventListener("resize", function(){
+			if($("#my_shade").css("display") == "block"){
+				$("#my_shade").css("height",$(document).height());
+		        $("#my_shade").css("width",$(document).width());
+		        var top_sch = ($(window).height() - $("#add_school_div").height())/2;
+		        var left_sch = ($(window).width() - $("#add_school_div").width())/2;
+		        var top_batch = ($(window).height() - $("#batch_div").height())/2;
+		        var left_batch = ($(window).width() - $("#batch_div").width())/2;
+		        var scrollTop = $(document).scrollTop();
+		        var scrollLeft = $(document).scrollLeft();
+		        if(top_sch + scrollTop - 122 > 0 && left_sch + scrollLeft - 180 > 0){
+		        	$("#add_school_div").css( { position : "absolute", "top" : top_sch + scrollTop - 122, "left" : left_sch + scrollLeft - 180} );
+		        }else{
+		        	$("#add_school_div").css( { position : "absolute", "top" : "0", "left" : "0"} );
+		        }
+		        if(top_batch + scrollTop - 122 > 0 && left_batch + scrollLeft - 180 > 0){
+		        	$("#batch_div").css( { position : "absolute", "top" : top_batch + scrollTop - 122, "left" : left_batch + scrollLeft - 180} );
+		        }else{
+		        	$("#batch_div").css( { position : "absolute", "top" : "0", "left" : "0"} );
+		        }
+			}
+		}, false);
+		
 	},
 	
 	add_student : function(){
@@ -143,4 +198,52 @@ var stumgr = {
 				stumgr.getAllStudent();
 	  	});
 	},
+	
+	setOption : function(_selectid){
+		var selectid = document.getElementById(_selectid);
+	    var var_option;
+	    var date = new Date();//获取当前时间
+	    var year = date.getFullYear();
+	    
+	    var_option = document.createElement("option");
+        //将option添加到选择框中
+        selectid.options.add(var_option);
+        //默认选中状态
+        selectid.options[0].selected=true;
+        var_option.innerHTML = "全部";
+        var_option.value = "";
+	    
+	    if(year > 2010){
+	        for(var i = 2010; i <= year;i++){
+	            //创建option
+	            var_option = document.createElement("option");
+	            //将option添加到选择框中
+	            selectid.options.add(var_option);
+	            var_option.innerHTML = i + "年";
+	            var_option.value = i;
+	        }
+	    }
+	},
+	
+	showBatchBox : function(){
+		$("#my_shade").css("height",$(document).height());
+        $("#my_shade").css("width",$(document).width());
+        $("#my_shade").show();
+        var top = ($(window).height() - $("#batch_div").height())/2;
+        var left = ($(window).width() - $("#batch_div").width())/2;
+        var scrollTop = $(document).scrollTop();
+        var scrollLeft = $(document).scrollLeft();
+        if(top + scrollTop-122 > 0 && left + scrollLeft-180 > 0){
+        	$("#batch_div").css( { position : "absolute", "top" : top + scrollTop-122, "left" : left + scrollLeft-180} ).show();
+        }else{
+        	$("#batch_div").css( { position : "absolute", "top" : "0", "left" : "0"} ).show();
+        }
+	},
+	
+	hideBatchBox : function(){
+		$("#my_shade").css("height","0");
+        $("#my_shade").hide();
+        $("#batch_div").hide();
+	},
+	
 };

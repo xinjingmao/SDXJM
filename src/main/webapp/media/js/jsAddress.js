@@ -90,7 +90,7 @@
 	cmbSelect(cmbProvince, defaultProvince);
 	changeProvince();
 	cmbProvince.onchange = changeProvince;
-}
+};
 
 
 var provinceList = [

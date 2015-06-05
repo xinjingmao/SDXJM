@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>管理员登陆</title>
     <link rel="stylesheet" href="${cssRoot}/style.css" type="text/css" />
+    <link rel="shortcut icon" href="${imageRoot}/bitbug_favicon.ico" />
 </head>
 <body>
     <div class="l_all">
