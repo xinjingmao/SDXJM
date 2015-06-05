@@ -17,7 +17,8 @@ var schmgr = {
 //		$("#add_school").click(function(){
 //			base.switchDiv("#add_school_div","#list_school_div","#list_college_div","#list_major_div");
 //		});
-		$("#list_school").click(function(){
+		$("#list_school").click(function() {
+			$("#li_add_school").show();
 			schmgr.getAllschool();
 			base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
 		});
@@ -35,7 +36,7 @@ var schmgr = {
 		$("#list_major").click(function(){
 			base.switchDiv("#list_major_div","#add_school_div","#add_college_div","#list_school_div","#add_major_div","#list_college_div");
 		});*/
-		
+		//添加学校
 		$("#add_btn").click(function() {
 			schmgr.add_school();
 		});
@@ -49,12 +50,42 @@ var schmgr = {
 			schmgr.showBox();
 		});
 		
+		//批量导入
+		$("#tobatch_btn").click(function() {
+			schmgr.hideBox();
+			schmgr.showBatchBox();
+		});
+		
+		$("#batch_close").click(function() {
+			schmgr.hideBatchBox();
+		});
+		
+		$("#close_btn").click(function() {
+			schmgr.hideBatchBox();
+		});
+		
+		$("#batch_btn").click(function() {
+			var file = $("#batchInputFile").val();
+			if(file != ""){
+				if(!/.(xls|xlsx|xlsm)$/.test(file.toLowerCase())){
+					alert("文件类型不是Excel文件!");
+					return false;
+				}else{
+					alert("批量导入成功");
+					schmgr.hideBatchBox();
+				}
+			}else{
+				alert("请选择您要导入的文件!");
+			}
+		});
+		
+		
 		$("#query_sch_btn").click(function() {
 			schmgr.getAllschool();
 		});
 		
 		$("#query_somesch_btn").click(function() {
-			schmgr.getSomeschool()
+			schmgr.getSomeschool();
 		});
 		
 		$("body").on("click",".addcol",function(){
@@ -62,6 +93,7 @@ var schmgr = {
 		});
 		$("body").on("click",".listcol",function(){
 			schmgr.listCollege($(this).attr("value"));
+			$("#li_add_school").hide();
 		});
 		
 		$("body").on("click",".addmaj",function(){
@@ -69,6 +101,7 @@ var schmgr = {
 		});
 		$("body").on("click",".listmaj",function(){
 			schmgr.listMajor($(this).attr("value"));
+			$("#li_add_school").hide();
 		});
 		
 		$("body").on("click","#add_btn1",function(){
@@ -103,14 +136,21 @@ var schmgr = {
 			if($("#my_shade").css("display") == "block"){
 				$("#my_shade").css("height",$(document).height());
 		        $("#my_shade").css("width",$(document).width());
-		        var top = ($(window).height() - $("#add_school_div").height())/2;
-		        var left = ($(window).width() - $("#add_school_div").width())/2;
+		        var top_sch = ($(window).height() - $("#add_school_div").height())/2;
+		        var left_sch = ($(window).width() - $("#add_school_div").width())/2;
+		        var top_batch = ($(window).height() - $("#batch_div").height())/2;
+		        var left_batch = ($(window).width() - $("#batch_div").width())/2;
 		        var scrollTop = $(document).scrollTop();
 		        var scrollLeft = $(document).scrollLeft();
-		        if(top + scrollTop-122 > 0 && left + scrollLeft-180 > 0){
-		        	$("#add_school_div").css( { position : "absolute", "top" : top + scrollTop-122, "left" : left + scrollLeft-180} );
+		        if(top_sch + scrollTop - 122 > 0 && left_sch + scrollLeft - 180 > 0){
+		        	$("#add_school_div").css( { position : "absolute", "top" : top_sch + scrollTop - 122, "left" : left_sch + scrollLeft - 180} );
 		        }else{
 		        	$("#add_school_div").css( { position : "absolute", "top" : "0", "left" : "0"} );
+		        }
+		        if(top_batch + scrollTop - 122 > 0 && left_batch + scrollLeft - 180 > 0){
+		        	$("#batch_div").css( { position : "absolute", "top" : top_batch + scrollTop - 122, "left" : left_batch + scrollLeft - 180} );
+		        }else{
+		        	$("#batch_div").css( { position : "absolute", "top" : "0", "left" : "0"} );
 		        }
 			}
 		}, false);
@@ -286,6 +326,27 @@ var schmgr = {
 		$("#my_shade").css("height","0");
         $("#my_shade").hide();
         $("#add_school_div").hide();
+	},
+	
+	showBatchBox : function(){
+		$("#my_shade").css("height",$(document).height());
+        $("#my_shade").css("width",$(document).width());
+        $("#my_shade").show();
+        var top = ($(window).height() - $("#batch_div").height())/2;
+        var left = ($(window).width() - $("#batch_div").width())/2;
+        var scrollTop = $(document).scrollTop();
+        var scrollLeft = $(document).scrollLeft();
+        if(top + scrollTop-122 > 0 && left + scrollLeft-180 > 0){
+        	$("#batch_div").css( { position : "absolute", "top" : top + scrollTop-122, "left" : left + scrollLeft-180} ).show();
+        }else{
+        	$("#batch_div").css( { position : "absolute", "top" : "0", "left" : "0"} ).show();
+        }
+	},
+	
+	hideBatchBox : function(){
+		$("#my_shade").css("height","0");
+        $("#my_shade").hide();
+        $("#batch_div").hide();
 	},
 };
 

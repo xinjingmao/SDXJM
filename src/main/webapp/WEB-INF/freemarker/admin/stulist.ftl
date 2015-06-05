@@ -39,7 +39,7 @@
         <td>${stu.school}</td>
         <td>${stu.college}</td>
         <td>${stu.major}</td>
-        <td>${stu.grade}</td>
+        <td>${stu.grade}年</td>
         <td>${stu.classes}</td>
         <td>${stu.position}</td>
         <td>${stu.addTime?string("yyyy-MM-dd HH:mm:ss")}</td>

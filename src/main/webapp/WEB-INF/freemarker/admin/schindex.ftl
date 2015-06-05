@@ -8,6 +8,7 @@
 <title>学生录入系统</title>
 <#include "/admin/include/admin-css.html">  
 <link rel="stylesheet" href="${cssRoot}/bootstrap.min.css" type="text/css" />
+<link rel="shortcut icon" href="${imageRoot}/bitbug_favicon.ico" />
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         
     <div id="admin_content" class="i_frame_content">
     	<ul id="sch_data"  class="nav nav-tabs nav-justified">
-            <li><a href="javascript:;" id="add_school">添加学校</a></li>                
+            <li id="li_add_school"><a href="javascript:;" id="add_school">添加学校</a></li>                
             <li><a href="javascript:;" id="list_school">学校列表</a></li>				
         </ul>
         <div id="add_school_div">
@@ -66,13 +67,42 @@
 	                    </div>
 	                </div>
 	            </form>
-	            <div class="row">
-	                <div class="span_BFB btn_bottom">
+	            <div class="row btn_bottom">
+	                <div class="span2">
 	                    <button id="add_btn" class="btn btn-success btn_center">添&nbsp; &nbsp;加</button>
+	                </div>
+	                <div class="span2">
+	                    <button id="tobatch_btn" class="btn btn-success btn_center">批量导入</button>
 	                </div>
 	            </div>
 	        </div>
         </div><!-- end of add_school_div -->
+        
+        <div id="batch_div">
+        	<div class="batch_hander">
+	            <h2>批量导入</h2>
+	            <a href="javascript:;" id="batch_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+	        </div>
+			<div class="batch_content">
+	            <form method="post" id="batch_form">
+	                <div class="row">
+	                    <div class="span_BFB form-group">
+	                        <input type="file" id="batchInputFile">
+	                        <p><a href="#">点击下载模板</a></p>
+	                    </div>
+	                </div>
+	            </form>
+	            <div class="row btn_bottom">
+	                <div class="span2">
+	                	<button id="batch_btn" class="btn btn-success">批量导入</button>
+	                </div>
+	                <div class="span2">
+	                    <button id="close_btn" class="btn btn-success">取&nbsp; &nbsp;消</button>
+	                </div>
+	            </div>
+	        </div>
+        </div><!-- end of batch_div -->
+        
         <div id="list_school_div" class="u_content">
             <form id="query_sch_form">
             	<div class="row row-margin">
@@ -115,6 +145,18 @@
 <script type="text/javascript">
 	addressInit('province', 'city', 'area', null,null,null, '广东', '广州市', '天河区');
 	addressInit('province1', 'city1', 'area1', null,null,null, '广东', '广州市', '市辖区');
+	//适配File 在火狐中不美观的问题  
+        var fileInputAdapt=function(inputFile222){//style="padding-top: 0px; border: none;box-shadow:none"  
+            var brow=$.browser;  
+            if(brow.mozilla){//Firefox  
+                inputFile222.style.border='none';  
+                inputFile222.style.boxShadow='none';  
+                inputFile222.style.paddingTop='0px';  
+            }  
+        };  
+ 	window.onload=function(){  
+  	fileInputAdapt(com.whuang.hsj.$$id('exampleInputFile'));  
+}  
 </script>
 <script type="text/javascript" src="${jsRoot}/admin/schmgr.js"></script>
 </html>

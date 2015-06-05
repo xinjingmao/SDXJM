@@ -342,8 +342,8 @@ hr.gray{border:1px solid #ccc;}
 }
 /* end of border and box */
 
-/* buttons */
-.btn{border: medium none;color: #FFFFFF;cursor: pointer;font-weight: bold;width:72px;height:32px;font-size:16px;padding-bottom: 4px;}
+/* buttons 
+.btn{border: medium none;color: #FFFFFF;cursor: pointer;font-weight: bold;width:72px;height:32px;font-size:16px;padding-bottom: 4px;}*/
 .btn_orange{background: url("image/btn_orange.png") no-repeat scroll left top transparent;}
 .btn_green{background: url("image/btn_green.gif") no-repeat scroll left top transparent;width:85px;}
 .btn_yellow_s{background: url("image/btn_yellow_s.jpg") no-repeat scroll left top transparent;width:57px;height:28px;}

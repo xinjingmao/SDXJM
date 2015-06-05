@@ -5,9 +5,7 @@
 			<div class="span4">
 				<div class="input-group dis">
 			        <span class="input-group-addon">学&nbsp;校:</span>
-			        <div class="radio-box">
-			            <span id="sName">${sName}</span>
-			        </div>
+			        <input name="sName" id="sName" type="text" value="${sName}" class="form-control" readonly="readonly" style="background-color:#ffffff">
 			    </div>
 			</div>
 		</div>

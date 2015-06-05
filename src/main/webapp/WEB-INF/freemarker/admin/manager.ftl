@@ -8,6 +8,7 @@
 <title>学生录入系统</title>
 <#include "/admin/include/admin-css.html">  
 <link rel="stylesheet" href="${cssRoot}/bootstrap.min.css" type="text/css" />
+<link rel="shortcut icon" href="${imageRoot}/bitbug_favicon.ico" />
 </head>
 <body> 
  <div id="admin_container" class="i_frame">   
