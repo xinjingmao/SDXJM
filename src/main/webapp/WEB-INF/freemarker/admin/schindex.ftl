@@ -11,7 +11,8 @@
 </head>
 
 <body>
-  <div id="admin_container" class="i_frame">    
+<div id="my_shade"></div>
+<div id="admin_container" class="i_frame">    
   	<!-- background-->
 	  	<div class="i_frame_bg">
 	        <img src="${imageRoot}/bg_index.jpg"/>
@@ -25,40 +26,52 @@
             <li><a href="javascript:;" id="add_school">添加学校</a></li>                
             <li><a href="javascript:;" id="list_school">学校列表</a></li>				
         </ul>
-        <div id="add_school_div" class="u_content add list_hide">
-				<form method="post" id="add_school_form">
-					<div class="row">
-						<div class="span4">
-						    <div class="input-group dis">
-						        <span class="input-group-addon">&nbsp;&nbsp;省:</span>
-						        <select name="province" id="province" class="form-control"></select>
-						    </div>
-						</div>
-						<div class="span4">
-						    <div class="input-group dis">
-						        <span class="input-group-addon">&nbsp;&nbsp;市:</span>
-						        <select name="city" id="city" class="form-control"></select>
-						    </div>
-						</div>
-						<div class="span4">
-						    <div class="input-group dis">
-						        <span class="input-group-addon">&nbsp;&nbsp;区:</span>
-						        <select name="area" id="area" class="form-control"></select>
-						    </div>
-						</div>
-						<div class="span4">
-						    <div class="input-group dis">
-								<span class="input-group-addon" id="sizing-name">学&nbsp;校:</span>
-								<input name="name" id="name" type="text" value="" class="form-control" placeholder="请输入学校" aria-describedby="sizing-name">
-							</div>
-						</div>
-					</div>
-				</form>
-				<div class="row">
-					<div class="span3">
-						&nbsp; &nbsp;<button id="add_btn" class="btn btn-success">添&nbsp; &nbsp;加</button>
-					</div>
-				</div>
+        <div id="add_school_div">
+        	<div class="add_school_hander">
+	            <h2>添加学校</h2>
+	            <a href="javascript:;" id="add_school_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+	        </div>
+			<div class="add_school_content">
+	            <form method="post" id="add_school_form">
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon">&nbsp;&nbsp;省:</span>
+	                            <select name="province" id="province" class="form-control"></select>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon">&nbsp;&nbsp;市:</span>
+	                            <select name="city" id="city" class="form-control"></select>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon">&nbsp;&nbsp;区:</span>
+	                            <select name="area" id="area" class="form-control"></select>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon" id="sizing-name">学&nbsp;校:</span>
+	                            <input name="name" id="name" type="text" value="" class="form-control" placeholder="请输入学校" aria-describedby="sizing-name">
+	                        </div>
+	                    </div>
+	                </div>
+	            </form>
+	            <div class="row">
+	                <div class="span_BFB btn_bottom">
+	                    <button id="add_btn" class="btn btn-success btn_center">添&nbsp; &nbsp;加</button>
+	                </div>
+	            </div>
+	        </div>
         </div><!-- end of add_school_div -->
         <div id="list_school_div" class="u_content">
             <form id="query_sch_form">

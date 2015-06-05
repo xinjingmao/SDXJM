@@ -14,9 +14,9 @@ var schmgr = {
 
 	_event_ : function() {
 		//div显示和隐藏
-		$("#add_school").click(function(){
-			base.switchDiv("#add_school_div","#list_school_div","#list_college_div","#list_major_div");
-		});
+//		$("#add_school").click(function(){
+//			base.switchDiv("#add_school_div","#list_school_div","#list_college_div","#list_major_div");
+//		});
 		$("#list_school").click(function(){
 			schmgr.getAllschool();
 			base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
@@ -38,6 +38,15 @@ var schmgr = {
 		
 		$("#add_btn").click(function() {
 			schmgr.add_school();
+		});
+		
+		$("#add_school_close").click(function() {
+			schmgr.hideBox();
+		});
+		
+		$("#add_school").click(function() {
+			$("#name").val("");
+			schmgr.showBox();
 		});
 		
 		$("#query_sch_btn").click(function() {
@@ -89,12 +98,32 @@ var schmgr = {
 		$("body").on("click",".delsch",function(){
 			schmgr.delSchool($(this).attr("id"));
 		});
+
+		window.addEventListener("resize", function(){
+			if($("#my_shade").css("display") == "block"){
+				$("#my_shade").css("height",$(document).height());
+		        $("#my_shade").css("width",$(document).width());
+		        var top = ($(window).height() - $("#add_school_div").height())/2;
+		        var left = ($(window).width() - $("#add_school_div").width())/2;
+		        var scrollTop = $(document).scrollTop();
+		        var scrollLeft = $(document).scrollLeft();
+		        if(top + scrollTop-122 > 0 && left + scrollLeft-180 > 0){
+		        	$("#add_school_div").css( { position : "absolute", "top" : top + scrollTop-122, "left" : left + scrollLeft-180} );
+		        }else{
+		        	$("#add_school_div").css( { position : "absolute", "top" : "0", "left" : "0"} );
+		        }
+			}
+		}, false);
 	},
 	
 	add_school : function(){
 		var data = $("#add_school_form").serialize();
 		$.post("/sch/add",data,function(result){
   				alert(result.message);
+  				if(result.message == "添加学校成功"){
+  					schmgr.hideBox();
+  	  				schmgr.getAllschool();
+  				}
   	  	},"json");
 		
 	},
@@ -236,6 +265,27 @@ var schmgr = {
 		}else
 			return false;
 		
+	},
+	
+	showBox : function(){
+		$("#my_shade").css("height",$(document).height());
+        $("#my_shade").css("width",$(document).width());
+        $("#my_shade").show();
+        var top = ($(window).height() - $("#add_school_div").height())/2;
+        var left = ($(window).width() - $("#add_school_div").width())/2;
+        var scrollTop = $(document).scrollTop();
+        var scrollLeft = $(document).scrollLeft();
+        if(top + scrollTop-122 > 0 && left + scrollLeft-180 > 0){
+        	$("#add_school_div").css( { position : "absolute", "top" : top + scrollTop-122, "left" : left + scrollLeft-180} ).show();
+        }else{
+        	$("#add_school_div").css( { position : "absolute", "top" : "0", "left" : "0"} ).show();
+        }
+	},
+	
+	hideBox : function(){
+		$("#my_shade").css("height","0");
+        $("#my_shade").hide();
+        $("#add_school_div").hide();
 	},
 };
 

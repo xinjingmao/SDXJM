@@ -19,12 +19,12 @@
             <div class="left_nav">
                 <ul class="left_nav_ul">
                     <li id="li1" class="left_nav_li"><a href="/stu/index"><img src="${imageRoot}/edition_student.png">学生管理</a></li>
-                    <li id="li2" class="left_nav_li"><a href="/sch/index"><img src="${imageRoot}/edition_student.png">学校管理</a></li>
+                    <li id="li2" class="left_nav_li"><a href="/sch/index"><img src="${imageRoot}/school_list_image.png">学校管理</a></li>
                     <#if tel == '15915737718'>
-                    <li id="li3" class="left_nav_li"><a href="/admin/index"><img src="${imageRoot}/edition_lead.png">系统管理</a></li>
+                    <li id="li3" class="left_nav_li"><a href="/admin/index"><img src="${imageRoot}/system_image.png">系统管理</a></li>
                     </#if>
-                    <li id="li3" class="left_nav_li"><a href="/admin/tochange"><img src="${imageRoot}/edition_lead.png">修改密码</a></li>
-                    <li id="li3" class="left_nav_li"><a href="javascript:;" id="logoutbtn" onclick="logout()"><img src="${imageRoot}/edition_lead.png">退出</a></li>
+                    <li id="li3" class="left_nav_li"><a href="/admin/tochange"><img src="${imageRoot}/password_image.png">修改密码</a></li>
+                    <li id="li3" class="left_nav_li"><a href="javascript:;" id="logoutbtn" onclick="logout()"><img src="${imageRoot}/esc_image.png">退出</a></li>
                 </ul>
             </div>
         </div>

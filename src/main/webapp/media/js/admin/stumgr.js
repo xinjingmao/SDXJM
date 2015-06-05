@@ -27,6 +27,9 @@ var stumgr = {
 		
 		$("#add_btn").click(function() {
 			stumgr.add_student();
+
+//			stumgr.getAllStudent();
+//			base.switchDiv("#list_student_div","#add_student_div","#edit_student_div");
 		});
 		
 		/*$("#area").change(function(){
@@ -58,8 +61,11 @@ var stumgr = {
 		$.post("/stu/add",data,function(result){
 				//$("#stuTip").text(result.message);
   				alert(result.message);
+  				if(result.message == "添加学生成功"){
+  					stumgr.getAllStudent();
+  					base.switchDiv("#list_student_div","#add_student_div","#edit_student_div");
+  				}
   	  	},"json");
-		
 	},
 	
 	getAllStudent : function(){
@@ -120,6 +126,10 @@ var stumgr = {
 		var data = $("#edit_student_form").serialize();
 		$.post("/stu/edit",data,function(result){
   				alert(result.message);
+  				if(result.message == "更新成功"){
+  					stumgr.getAllStudent();
+  					base.switchDiv("#list_student_div","#add_student_div","#edit_student_div");
+  				}
   	  	},"json");
 		
 	},

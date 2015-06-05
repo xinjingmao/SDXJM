@@ -60,7 +60,7 @@
 	</#if>
 </div>
 
-<div id="col_list_div">
+<div id="col_list_div" class="maxheight">
 	学院：
 	<#if cList?size &gt; 0>
 	    <#list cList as c>
