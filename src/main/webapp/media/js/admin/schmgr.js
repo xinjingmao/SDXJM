@@ -269,7 +269,7 @@ var schmgr = {
 		var data = $("#add_college_form").serialize();
 		$.post("/sch/addCol",data,function(result){
 			if(result.success){
-				data = "id="+$("#schoolId").val()+"&name="+$("#sName").text();
+				data = "id="+$("#schoolId").val()+"&name="+$("#sName").val();
   				schmgr.listCollege(data);
 			}else
 				alert(result.message);
@@ -284,7 +284,7 @@ var schmgr = {
 		var data = $("#add_major_form").serialize();
 		$.post("/sch/addMaj",data,function(result){
 				if(result.success){
-					data = "id="+$("#sId").val()+"&name="+$("#sName1").text();
+					data = "id="+$("#sId").val()+"&name="+$("#sName1").val();
 	  				schmgr.listMajor(data);
 				}else
 					alert(result.message);
@@ -295,7 +295,7 @@ var schmgr = {
 		var f = confirm('确认删除此专业？');
 		if(f == true){
 			$.post("/sch/delMaj",id,function(result){
-  				var data = "id="+$("#sId").val()+"&name="+$("#sName1").text();
+  				var data = "id="+$("#sId").val()+"&name="+$("#sName1").val();
   				schmgr.listMajor(data);
   	  		});
 		}else
@@ -307,7 +307,7 @@ var schmgr = {
 		var f = confirm('确认删除此学院？');
 		if(f == true){
 			$.post("/sch/delCol",id,function(result){
-  				var data = "id="+$("#schoolId").val()+"&name="+$("#sName").text();
+  				var data = "id="+$("#schoolId").val()+"&name="+$("#sName").val();
   				schmgr.listCollege(data);
   	  		});
 		}else
@@ -318,7 +318,7 @@ var schmgr = {
 	updateCollege : function(){
 		var data = $("#update_college_form").serialize();
 		$.post("/sch/updateCol", data, function(result) {
-			data = "id=" + $("#schoolId").val() + "&name="+ $("#sName").text();
+			data = "id=" + $("#schoolId").val() + "&name="+ $("#sName").val();
 			schmgr.listCollege(data);
 		});
 		
