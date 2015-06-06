@@ -88,7 +88,7 @@
 	                <div class="row">
 	                    <div class="span_BFB form-group">
 	                        <input type="file" id="batchInputFile" name="schoolData">
-	                        <p><a href="/sch/download">点击下载模板</a></p>
+	                        <p><a href="/template/school_template.xls">点击下载模板</a></p>
 	                    </div>
 	                </div>
 	            </form>
