@@ -42,6 +42,35 @@ public class Student extends QueryParams{
 	private Date addTime;
 	/** 备注信息 */
 	private String remark;
+	
+	
+	
+	
+	public Student(String school, String name, int sex, String college,
+			String major, String grade, String classes, String position,
+			String province, String city, String area, String tel,
+			String qqNum, Date addTime) {
+		super();
+		this.school = school;
+		this.name = name;
+		this.sex = sex;
+		this.college = college;
+		this.major = major;
+		this.grade = grade;
+		this.classes = classes;
+		this.position = position;
+		this.province = province;
+		this.city = city;
+		this.area = area;
+		this.tel = tel;
+		this.qqNum = qqNum;
+		this.addTime = addTime;
+	}
+
+	public Student() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

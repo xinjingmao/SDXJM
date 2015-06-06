@@ -65,18 +65,57 @@ var schmgr = {
 		});
 		
 		$("#batch_btn").click(function() {
-			var file = $("#batchInputFile").val();
+			/*var file = $("#batchInputFile").val();
 			if(file != ""){
-				if(!/.(xls|xlsx|xlsm)$/.test(file.toLowerCase())){
+				if(!/.xls$/.test(file.toLowerCase())){
 					alert("文件类型不是Excel文件!");
 					return false;
 				}else{
-					alert("批量导入成功");
-					schmgr.hideBatchBox();
+					var data = $("#batch_form").serialize();
+					$.post("/sch/import",data,function(result){
+						if(result.success){
+							alert(result.message);
+							schmgr.hideBatchBox();
+						}else{
+							alert(result.message);
+						}
+					});
 				}
 			}else{
 				alert("请选择您要导入的文件!");
-			}
+			}*/
+			var form = $("#batch_form");  
+	        var options  = {
+	        	beforeSubmit: function(){
+	        		var file = $("#batchInputFile").val();
+	    			if(file != ""){
+	    				if(!/.xls$/.test(file.toLowerCase())){
+	    					alert("文件类型不是Excel文件!");
+	    					return false;
+	    				}
+	    			}else{
+	    				alert("请选择您要导入的文件!");
+	    				return false;
+	    			}
+	    			return true;
+	        	},	
+	        	dataType: 'json',
+	            url:'/sch/import',    
+	            type:'post',    
+	            success:function(result)    
+	            {    
+	            	if(result.success){
+						alert(result.message);
+						schmgr.hideBatchBox();
+						schmgr.getAllschool();
+						base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
+					}else{
+						alert(result.message);
+					}
+	               
+	            }    
+	        };    
+	        form.ajaxSubmit(options);
 		});
 		
 		

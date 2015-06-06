@@ -2,6 +2,8 @@ package sdxjm.service.admin;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import sdxjm.domain.College;
 import sdxjm.domain.Major;
 import sdxjm.domain.School;
@@ -39,4 +41,6 @@ public interface ISchoolService {
 	void delSchool(int id);
 
 	QuerySummary getSomeSchoolByPage(School s);
+
+	ServiceResult batchImport(MultipartFile schoolData);
 }

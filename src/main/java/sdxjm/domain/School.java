@@ -24,6 +24,21 @@ public class School extends QueryParams {
 	/** 添加时间 */
 	private Date addTime;
 
+	
+	public School() {
+		super();
+	}
+
+	public School(String name, String province, String city, String area,
+			Date addTime) {
+		super();
+		this.name = name;
+		this.province = province;
+		this.city = city;
+		this.area = area;
+		this.addTime = addTime;
+	}
+
 	public int getId() {
 		return id;
 	}

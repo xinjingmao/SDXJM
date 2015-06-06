@@ -1,11 +1,18 @@
 package sdxjm.service.admin.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import jxl.Sheet;
+import jxl.Workbook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import sdxjm.domain.College;
 import sdxjm.domain.Major;
@@ -13,6 +20,7 @@ import sdxjm.domain.School;
 import sdxjm.domain.vo.QuerySummary;
 import sdxjm.mapper.SchoolMapper;
 import sdxjm.service.admin.ISchoolService;
+import sdxjm.utils.StringUtil;
 import sdxjm.utils.web.BaseService;
 import sdxjm.utils.web.ServiceResult;
 
@@ -136,6 +144,69 @@ public class SchoolService extends BaseService implements ISchoolService {
 		QuerySummary qs = new QuerySummary(total, s);
 		qs.setSchList(schMapper.getSomeSchByPage(s));
 		return qs;
+	}
+
+	@Override
+	public ServiceResult batchImport(MultipartFile schoolData) {
+		try {
+			List<School> list = getAllByExcel(schoolData.getInputStream());
+			if (list == null || list.size() == 0) {
+				return failI18nResult("error.school.batchImport");
+			}
+			for (School s : list) {
+				School sc = schMapper.checkSchExit(s);
+				if (sc == null) {
+					schMapper.addSchool(s);
+				}
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return failI18nResult("error.school.batchImport");
+		}
+		return successI18nResult("success.school.batchImport");
+	}
+
+	/**
+	 * 查询指定目录中电子表格中所有的数据
+	 * 
+	 * @param inputStream
+	 * @return
+	 */
+	public static List<School> getAllByExcel(InputStream inputStream) {
+		List<School> list = new ArrayList<School>();
+		Date t = new Date();
+		try {
+			Workbook rwb = Workbook.getWorkbook(inputStream);
+			Sheet rs = rwb.getSheet(0);// 或者rwb.getSheet(0)
+			int clos = rs.getColumns();// 得到所有的列
+			int rows = rs.getRows();// 得到所有的行
+
+			for (int i = 1; i < rows; i++) {
+				for (int j = 0; j < clos; j++) {
+					// 第一个是列数，第二个是行数
+					String province = rs.getCell(j++, i).getContents();// 默认最左边编号也算一列
+																		// 所以这里得j++
+					String city = rs.getCell(j++, i).getContents();
+					String area = rs.getCell(j++, i).getContents();
+					String name = rs.getCell(j++, i).getContents();
+
+					if (StringUtil.isEmpty(province)
+							|| StringUtil.isEmpty(city)
+							|| StringUtil.isEmpty(area)
+							|| StringUtil.isEmpty(name)) {
+						continue;
+					}
+					list.add(new School(name, province, city, area, t));
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return list;
+
 	}
 
 }
