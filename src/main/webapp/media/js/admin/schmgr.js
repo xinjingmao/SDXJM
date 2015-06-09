@@ -13,30 +13,30 @@ var schmgr = {
 	},
 
 	_event_ : function() {
-		//div显示和隐藏
-//		$("#add_school").click(function(){
-//			base.switchDiv("#add_school_div","#list_school_div","#list_college_div","#list_major_div");
-//		});
+		// div显示和隐藏
+// $("#add_school").click(function(){
+// base.switchDiv("#add_school_div","#list_school_div","#list_college_div","#list_major_div");
+// });
 		$("#list_school").click(function() {
 			$("#li_add_school").show();
 			schmgr.getAllschool();
 			base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
 		});
 		
-		/*$("#add_college").click(function(){
-			base.switchDiv("#add_college_div","#list_school_div","#add_school_div","#list_college_div","#add_major_div","#list_major_div");
-		});
-		$("#list_college").click(function(){
-			base.switchDiv("#list_college_div","#add_school_div","#add_college_div","#list_school_div","#add_major_div","#list_major_div");
-		});
-		
-		$("#add_major").click(function(){
-			base.switchDiv("#add_major_div","#list_school_div","#add_school_div","#list_college_div","#add_college_div","#list_major_div");
-		});
-		$("#list_major").click(function(){
-			base.switchDiv("#list_major_div","#add_school_div","#add_college_div","#list_school_div","#add_major_div","#list_college_div");
-		});*/
-		//添加学校
+		/*
+		 * $("#add_college").click(function(){
+		 * base.switchDiv("#add_college_div","#list_school_div","#add_school_div","#list_college_div","#add_major_div","#list_major_div");
+		 * }); $("#list_college").click(function(){
+		 * base.switchDiv("#list_college_div","#add_school_div","#add_college_div","#list_school_div","#add_major_div","#list_major_div");
+		 * });
+		 * 
+		 * $("#add_major").click(function(){
+		 * base.switchDiv("#add_major_div","#list_school_div","#add_school_div","#list_college_div","#add_college_div","#list_major_div");
+		 * }); $("#list_major").click(function(){
+		 * base.switchDiv("#list_major_div","#add_school_div","#add_college_div","#list_school_div","#add_major_div","#list_college_div");
+		 * });
+		 */
+		// 添加学校
 		$("#add_btn").click(function() {
 			schmgr.add_school();
 		});
@@ -50,7 +50,7 @@ var schmgr = {
 			schmgr.showBox();
 		});
 		
-		//批量导入
+		// 批量导入
 		$("#tobatch_btn").click(function() {
 			schmgr.hideBox();
 			schmgr.showBatchBox();
@@ -65,25 +65,14 @@ var schmgr = {
 		});
 		
 		$("#batch_btn").click(function() {
-			/*var file = $("#batchInputFile").val();
-			if(file != ""){
-				if(!/.xls$/.test(file.toLowerCase())){
-					alert("文件类型不是Excel文件!");
-					return false;
-				}else{
-					var data = $("#batch_form").serialize();
-					$.post("/sch/import",data,function(result){
-						if(result.success){
-							alert(result.message);
-							schmgr.hideBatchBox();
-						}else{
-							alert(result.message);
-						}
-					});
-				}
-			}else{
-				alert("请选择您要导入的文件!");
-			}*/
+			/*
+			 * var file = $("#batchInputFile").val(); if(file != ""){
+			 * if(!/.xls$/.test(file.toLowerCase())){ alert("文件类型不是Excel文件!");
+			 * return false; }else{ var data = $("#batch_form").serialize();
+			 * $.post("/sch/import",data,function(result){ if(result.success){
+			 * alert(result.message); schmgr.hideBatchBox(); }else{
+			 * alert(result.message); } }); } }else{ alert("请选择您要导入的文件!"); }
+			 */
 			var form = $("#batch_form");  
 	        var options  = {
 	        	beforeSubmit: function(){
@@ -163,8 +152,8 @@ var schmgr = {
 			schmgr.updateCollege();
 		});
 		
-		$("body").on("click",".changeName",function(){
-			schmgr.changeSchName($(this).attr("id"));
+		$("body").on("click",".updateSchool",function(){
+			schmgr.updateSchool($(this).attr("id"));
 		});
 		
 		$("body").on("click",".delsch",function(){
@@ -233,32 +222,31 @@ var schmgr = {
 		});
 	},
 	
-	/*toAddCollege : function(id){
-		var d = id.split("-");
-		$("#schoolId").val(d[0]);
-		$("#sName").text(d[1]);
-		base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
-	},*/
+	/*
+	 * toAddCollege : function(id){ var d = id.split("-");
+	 * $("#schoolId").val(d[0]); $("#sName").text(d[1]);
+	 * base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div"); },
+	 */
 	
 	listCollege : function(val){
-		/*var d = val.split("-");
-		$("#schoolId").val(d[0]);
-		$("#sName").text(d[1]);*/
+		/*
+		 * var d = val.split("-"); $("#schoolId").val(d[0]);
+		 * $("#sName").text(d[1]);
+		 */
 		$.post("/sch/listCol",val,function(result){
 			$("#list_college_div").html(result);
 	  	});
 		base.switchDiv("#list_college_div","#add_school_div","#list_school_div","#list_major_div");
 	},
 	
-	/*toAddMajor : function(id){
-		var d = id.split("-");
-		//$("#schoolId").val(d[0]);
-		$("#sName2").text(d[1]);
-		base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div");
-	},*/
+	/*
+	 * toAddMajor : function(id){ var d = id.split("-");
+	 * //$("#schoolId").val(d[0]); $("#sName2").text(d[1]);
+	 * base.switchDiv("#list_school_div","#add_school_div","#list_college_div","#list_major_div"); },
+	 */
 	
 	listMajor : function(val){
-		//var d = val.split("-");
+		// var d = val.split("-");
 		$.post("/sch/listMaj",val,function(result){
 			$("#list_major_div").html(result);
 	  	});
@@ -324,13 +312,18 @@ var schmgr = {
 		
 	},
 	
-	changeSchName : function(id){
-		var res = confirm("确认更该校名？");
+	updateSchool : function(id){
+		var res = confirm("确认更该学校属性？");
 		if(res == false){
 			return false;
 		}
-		var data = "name="+$("#sN"+id).val()+"&id="+id;
-		$.post("/sch/changeSName", data, function(result) {
+		var data = ["id=", id,
+		            "&name=", $("#sN"+id).val(),
+					"&address=", $("#sA"+id).val(),
+					"&nature=", $("#sNa"+id).val(),
+					"&kind=", $("#sK"+id).val()
+		            ].join("");
+		$.post("/sch/updateSchool", data, function(result) {
 			alert(result.message);
 		},"json");
 	},

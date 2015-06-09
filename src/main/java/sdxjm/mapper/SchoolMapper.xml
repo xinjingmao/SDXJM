@@ -22,14 +22,21 @@
 		,city
 		,area
 		,addTime
+		,nature
+		,kind
+		,address
 		)
 		VALUES(
 		#{id}
 		, #{name}
 		, #{province}
 		, #{city}
-		, #{area}
+		,
+		#{area}
 		, #{addTime}
+		, #{nature}
+		, #{kind}
+		, #{address}
 
 		)
 	</insert>
@@ -137,8 +144,11 @@
 	</update>
 
 	<update id="changeSName" parameterType="School">
-		UPDATE school SET name =
-		#{name} WHERE id = #{id}
+		UPDATE school SET name = #{name} 
+		, address = #{address}
+		, nature = #{nature}
+		, kind = #{kind}
+		WHERE id = #{id}
 	</update>
 
 	<delete id="delSchool" parameterType="int">
@@ -157,6 +167,12 @@
 			</if>
 			<if test="area != '全部'">
 				AND area = #{area}
+			</if>
+			<if test="nature != 0">
+				AND nature = #{nature}
+			</if>
+			<if test="kind != 0">
+				AND kind = #{kind}
 			</if>
 			<if test="name != ''">
 				AND name = #{name}
@@ -201,7 +217,7 @@
 		<foreach collection="list" item="item" index="index"
 			separator=",">
 			(
-			 #{item.name}
+			#{item.name}
 			, #{item.province}
 			, #{item.city}
 			, #{item.area}

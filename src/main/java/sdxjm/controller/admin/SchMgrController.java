@@ -122,7 +122,7 @@ public class SchMgrController extends BaseController{
 		schService.updateCollege(c);
 	}
 	
-	@RequestMapping("/changeSName")
+	@RequestMapping("/updateSchool")
 	@ResponseBody
 	public String changeSName(School s){
 		return JsonUtil.toJsonText(schService.changeSName(s));

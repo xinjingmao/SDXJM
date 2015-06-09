@@ -23,6 +23,12 @@ public class School extends QueryParams {
 	private String area;
 	/** 添加时间 */
 	private Date addTime;
+	/** 学校性质 */
+	private int nature;
+	/** 学校性质 */
+	private int kind;
+	/**  学校地址*/
+	private String address;
 
 	
 	public School() {
@@ -37,6 +43,19 @@ public class School extends QueryParams {
 		this.city = city;
 		this.area = area;
 		this.addTime = addTime;
+	}
+
+	public School(String name, String province, String city, String area,
+			Date addTime, int nature, int kind, String address) {
+		super();
+		this.name = name;
+		this.province = province;
+		this.city = city;
+		this.area = area;
+		this.addTime = addTime;
+		this.nature = nature;
+		this.kind = kind;
+		this.address = address;
 	}
 
 	public int getId() {
@@ -101,6 +120,31 @@ public class School extends QueryParams {
 
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
+	}
+
+	
+	public int getNature() {
+		return nature;
+	}
+
+	public void setNature(int nature) {
+		this.nature = nature;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getKind() {
+		return kind;
+	}
+
+	public void setKind(int kind) {
+		this.kind = kind;
 	}
 
 	public String verify() {

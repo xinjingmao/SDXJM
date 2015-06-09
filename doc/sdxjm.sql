@@ -15,7 +15,7 @@ CREATE TABLE `student` (
   `position` varchar(20) NOT NULL COMMENT '职位',
   `agentId` int(11) NOT NULL DEFAULT '0' COMMENT '录入人Id',
   `addTime` datetime NOT NULL COMMENT '添加时间',
-  `remark` longtext NOT NULL DEFAULT '' COMMENT '备注信息',
+  `remark` longtext  COMMENT '备注信息',
   PRIMARY KEY (`id`),
   UNIQUE KEY `tel` (`tel`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT '学生信息';

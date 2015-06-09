@@ -180,24 +180,28 @@ public class SchoolService extends BaseService implements ISchoolService {
 			Workbook rwb = Workbook.getWorkbook(inputStream);
 			Sheet rs = rwb.getSheet(0);// 或者rwb.getSheet(0)
 			int clos = rs.getColumns();// 得到所有的列
-			int rows = rs.getRows();// 得到所有的行
+			int rows = rs.getRows() > 5000 ? 5000 : rs.getRows();// 得到所有的行
 
 			for (int i = 1; i < rows; i++) {
 				for (int j = 0; j < clos; j++) {
 					// 第一个是列数，第二个是行数
 					String province = rs.getCell(j++, i).getContents();// 默认最左边编号也算一列
 																		// 所以这里得j++
+					if (StringUtil.isEmpty(province))
+						continue;
 					String city = rs.getCell(j++, i).getContents();
 					String area = rs.getCell(j++, i).getContents();
 					String name = rs.getCell(j++, i).getContents();
+					String address = rs.getCell(j++, i).getContents();
+					int nature = getNature(rs.getCell(j++, i).getContents());
+					int kind = getKind(rs.getCell(j++, i).getContents());
 
-					if (StringUtil.isEmpty(province)
-							|| StringUtil.isEmpty(city)
-							|| StringUtil.isEmpty(area)
+					if (StringUtil.isEmpty(city) || StringUtil.isEmpty(area)
 							|| StringUtil.isEmpty(name)) {
 						continue;
 					}
-					list.add(new School(name, province, city, area, t));
+					list.add(new School(name, province, city, area, t, nature,
+							kind, address));
 				}
 			}
 		} catch (Exception e) {
@@ -207,6 +211,47 @@ public class SchoolService extends BaseService implements ISchoolService {
 		}
 		return list;
 
+	}
+
+	private static int getNature(String s) {
+		if (s.equals("本科")) {
+			return 1;
+		}
+		if (s.equals("专科")) {
+			return 2;
+		}
+		if (s.equals("中专"))
+			return 3;
+
+		return 0;
+	}
+
+	private static int getKind(String s) {
+		if (s.equals("综合类"))
+			return 1;
+		if (s.equals("理工类"))
+			return 2;
+		if (s.equals("师范类"))
+			return 3;
+		if (s.equals("农林类"))
+			return 4;
+		if (s.equals("政法类"))
+			return 5;
+		if (s.equals("医药类"))
+			return 6;
+		if (s.equals("财经类"))
+			return 7;
+		if (s.equals("民族类"))
+			return 8;
+		if (s.equals("语言类"))
+			return 9;
+		if (s.equals("艺术类"))
+			return 10;
+		if (s.equals("体育类"))
+			return 11;
+		if (s.equals("军事类"))
+			return 12;
+		return 0;
 	}
 
 }

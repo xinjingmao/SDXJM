@@ -66,6 +66,47 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon" id="sizing-name">详细地址:</span>
+	                            <input name="address" id="address" type="text" value="" class="form-control" placeholder="请输入学校地址" aria-describedby="sizing-name">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon" id="sizing-name">学校性质:</span>
+	                            <select name="nature" id="nature" class="form-control">
+	                            	<option value="1">本科</option>
+	                            	<option value="2">专科</option>
+	                            	<option value="3">中专</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="span_BFB">
+	                        <div class="input-group dis">
+	                            <span class="input-group-addon" id="sizing-name">学校种类:</span>
+	                            <select name="kind" id="kind" class="form-control">
+	                            	<option value="1">综合类</option>
+	                            	<option value="2">理工类</option>
+	                            	<option value="3">师范类</option>
+	                            	<option value="4">农林类</option>
+	                            	<option value="5">政法类</option>
+	                            	<option value="6">医药类</option>
+	                            	<option value="7">财经类</option>
+	                            	<option value="8">民族类</option>
+	                            	<option value="9">语言类</option>
+	                            	<option value="10">艺术类</option>
+	                            	<option value="11">体育类</option>
+	                            	<option value="12">军事类</option>
+	                            </select>
+	                        </div>
+	                    </div>
+	                </div>
 	            </form>
 	            <div class="row btn_bottom">
 	                <div class="span2">
@@ -114,6 +155,34 @@
 					<div class="span2"><select name="area" id="area1" class="form-control"></select></div>
 					<div class="span1"><p>学&nbsp; &nbsp;校</p></div>
 					<div class="span4"><input type="text" name="name" id="school1"  class="form-control"/></div>
+				</div>
+				<div class="row row-margin">
+					<div class="span1"><p>学校性质</p></div>
+					<div class="span2">
+						<select name="nature" class="form-control">
+							<option value="0"></option>
+							<option value="1">本科</option>
+                        	<option value="2">专科</option>
+                        	<option value="3">中专</option>
+						</select></div>
+					<div class="span1"><p>学校种类</p></div>
+					<div class="span2">
+						<select name="kind" class="form-control">
+							<option value="0"></option>
+							<option value="1">综合类</option>
+                        	<option value="2">理工类</option>
+                        	<option value="3">师范类</option>
+                        	<option value="4">农林类</option>
+                        	<option value="5">政法类</option>
+                        	<option value="6">医药类</option>
+                        	<option value="7">财经类</option>
+                        	<option value="8">民族类</option>
+                        	<option value="9">语言类</option>
+                        	<option value="10">艺术类</option>
+                        	<option value="11">体育类</option>
+                        	<option value="12">军事类</option>
+						</select>
+					</div>
 				</div>
 				<div class="row row-margin">
 					<div class="span1_btn"><input type="button" class="btn btn-primary" id="query_sch_btn" value="全&nbsp; &nbsp;部" /></div>
