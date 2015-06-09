@@ -165,8 +165,8 @@
 			        </div>
 		        </div><!-- end of batch_div -->
 		            
-		        <div id="list_student_div" class="u_content">
-		            <form id="query_stu_form">
+		        <div id="list_student_div">
+		            <form id="query_stu_form" class="u_content">
 		            	<div class="row row-margin">
 						  <div class="span1"><p>省&nbsp; &nbsp;份</p></div>
 						  <div class="span2"><select name="province" id="province1" class="form-control"></select></div>

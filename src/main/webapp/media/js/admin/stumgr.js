@@ -215,8 +215,7 @@ var stumgr = {
 	    
 	    if(year > 2010){
 	        for(var i = 2010; i <= year;i++){
-	            //创建option
-	            var_option = document.createElement("option");
+	        	var_option = document.createElement("option");
 	            //将option添加到选择框中
 	            selectid.options.add(var_option);
 	            var_option.innerHTML = i + "年";

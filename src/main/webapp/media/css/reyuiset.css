@@ -655,17 +655,14 @@ table .wd-100{
 	width:120px;
 }
 table.color{
-        color: #333333;
-        font-size: 12px;
-        text-align: left;
-        padding:4px;
-		border-left:1px solid #ccc;
-		border-top:1px solid #ccc;
+        color: #AAAAAA;
+		width:99%;
+		margin:0 auto;
 }
-table.color tr {
+table tr {
     height:24px;
 }
-table.color tr.even td{
+table tr.even td{
     background-color: #F0F0F0;
 }
 table.color th {

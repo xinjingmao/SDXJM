@@ -103,8 +103,8 @@
 	        </div>
         </div><!-- end of batch_div -->
         
-        <div id="list_school_div" class="u_content">
-            <form id="query_sch_form">
+        <div id="list_school_div">
+            <form id="query_sch_form" class="u_content">
             	<div class="row row-margin">
 					<div class="span1"><p>省&nbsp; &nbsp;份</p></div>
 					<div class="span2"><select name="province" id="province1" class="form-control"></select></div>
@@ -145,18 +145,6 @@
 <script type="text/javascript">
 	addressInit('province', 'city', 'area', null,null,null, '广东', '广州市', '天河区');
 	addressInit('province1', 'city1', 'area1', null,null,null, '广东', '广州市', '市辖区');
-	//适配File 在火狐中不美观的问题  
-        var fileInputAdapt=function(inputFile222){//style="padding-top: 0px; border: none;box-shadow:none"  
-            var brow=$.browser;  
-            if(brow.mozilla){//Firefox  
-                inputFile222.style.border='none';  
-                inputFile222.style.boxShadow='none';  
-                inputFile222.style.paddingTop='0px';  
-            }  
-        };  
- 	window.onload=function(){  
-  	fileInputAdapt(com.whuang.hsj.$$id('exampleInputFile'));  
-}  
 </script>
 <script type="text/javascript" src="${jsRoot}/admin/schmgr.js"></script>
 </html>

@@ -6,6 +6,7 @@
 }
 body{
     height: auto;
+    font-family:"Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
 }
 /***landing.html登陆页面***/
 .l_all{
@@ -921,4 +922,25 @@ endColorstr='#f16c7c');
 }
 .btn_bottom{
 	margin-bottom:40px;
+}
+
+.mun_style{
+	width:99%;
+	margin:0 auto;
+	border:1px solid #ddd;
+	border-bottom:none;
+	margin-top:5px;
+}
+
+.table_style{
+	width:99%;
+	margin:0 auto;
+}
+
+.table_style>tbody>tr>td,.table_style>thead>tr>th{
+	padding:8px;
+	text-align:center;
+}
+.table_style>thead{
+	background-color: #dff0d8;
 }
