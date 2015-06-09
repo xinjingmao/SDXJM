@@ -3,12 +3,15 @@ package sdxjm.controller.admin;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import sdxjm.domain.College;
@@ -119,7 +122,7 @@ public class SchMgrController extends BaseController{
 		schService.updateCollege(c);
 	}
 	
-	@RequestMapping("/changeSName")
+	@RequestMapping("/updateSchool")
 	@ResponseBody
 	public String changeSName(School s){
 		return JsonUtil.toJsonText(schService.changeSName(s));
@@ -129,5 +132,21 @@ public class SchMgrController extends BaseController{
 	@ResponseBody
 	public void delSch(int id){
 		schService.delSchool(id);
+	}
+	
+	@RequestMapping("/import")
+    @ResponseBody
+    public String pictureUpload(@RequestParam MultipartFile schoolData, HttpServletRequest request) {
+		return JsonUtil.toJsonText(schService.batchImport(schoolData));
+    	
+    }
+	
+	@RequestMapping("/download")
+	@ResponseBody
+	public void download(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String storeName = "school_template.xls";
+		download(request, response, storeName);
 	}
 }

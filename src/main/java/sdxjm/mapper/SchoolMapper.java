@@ -46,4 +46,6 @@ public interface SchoolMapper {
 	List<School> getSomeSchByPage(School s);
 
 	School checkSchExit(School s);
+
+	void batchImport(List<School> list);
 }

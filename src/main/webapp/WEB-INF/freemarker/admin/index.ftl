@@ -146,11 +146,11 @@
 			            <a href="javascript:;" id="batch_close"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
 			        </div>
 					<div class="batch_content">
-			            <form method="post" id="batch_form">
+			            <form method="post" id="batch_form" enctype="multipart/form-data">
 			                <div class="row">
 			                    <div class="span_BFB form-group">
-			                        <input type="file" id="batchInputFile">
-			                        <p><a href="#">点击下载模板</a></p>
+			                        <input type="file" id="batchInputFile" name="stuData">
+			                        <p><a href="/template/student_template.xls">点击下载模板</a></p>
 			                    </div>
 			                </div>
 			            </form>

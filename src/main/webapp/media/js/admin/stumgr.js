@@ -72,18 +72,37 @@ var stumgr = {
 		});
 		
 		$("#batch_btn").click(function() {
-			var file = $("#batchInputFile").val();
-			if(file != ""){
-				if(!/.(xls|xlsx|xlsm)$/.test(file.toLowerCase())){
-					alert("文件类型不是Excel文件!");
-					return false;
-				}else{
-					alert("批量导入成功");
-					stumgr.hideBatchBox();
-				}
-			}else{
-				alert("请选择您要导入的文件!");
-			}
+			var form = $("#batch_form");  
+	        var options  = {
+	        	beforeSubmit: function(){
+	        		var file = $("#batchInputFile").val();
+	    			if(file != ""){
+	    				if(!/.xls$/.test(file.toLowerCase())){
+	    					alert("文件类型不是Excel文件!");
+	    					return false;
+	    				}
+	    			}else{
+	    				alert("请选择您要导入的文件!");
+	    				return false;
+	    			}
+	    			return true;
+	        	},	
+	        	dataType: 'json',
+	            url:'/stu/import',    
+	            type:'post',    
+	            success:function(result)    
+	            {    
+	            	if(result.success){
+						alert(result.message);
+						stumgr.hideBatchBox();
+						stumgr.getAllStudent();
+						base.switchDiv("#list_student_div","#add_student_div","#edit_student_div");
+					}else{
+						alert(result.message);
+					}
+	            }    
+	        };    
+	        form.ajaxSubmit(options);
 		});
 		
 		window.addEventListener("resize", function(){
@@ -116,7 +135,7 @@ var stumgr = {
 		$.post("/stu/add",data,function(result){
 				//$("#stuTip").text(result.message);
   				alert(result.message);
-  				if(result.message == "添加学生成功"){
+  				if(result.success){
   					stumgr.getAllStudent();
   					base.switchDiv("#list_student_div","#add_student_div","#edit_student_div");
   				}

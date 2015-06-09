@@ -1,176 +1,230 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC   
     "-//mybatis.org//DTD Mapper 3.0//EN"  
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
-<mapper namespace="sdxjm.mapper.SchoolMapper">  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--这块等于dao接口的实现 namespace必须和接口的类路径一样 -->
+<mapper namespace="sdxjm.mapper.SchoolMapper">
 
-    <!-- sql的 id必须和接口中的方法名一样  -->  
-    <select id="getAllSchool" parameterType="School" resultType="School">  
-        SELECT * FROM school LIMIT #{start},#{len} 
-    </select>
-    <select id="getSchTotalNum" resultType="int">  
-        SELECT count(1) FROM school 
-    </select>
-    <insert id="addSchool" parameterType="School" useGeneratedKeys="true" keyProperty="id">
-    	INSERT INTO school(
-				id
-			  ,name
-			  ,province
-			  ,city
-			  ,area
-			  ,addTime
-			)
+	<!-- sql的 id必须和接口中的方法名一样 -->
+	<select id="getAllSchool" parameterType="School" resultType="School">
+		SELECT * FROM school LIMIT #{start},#{len}
+	</select>
+	<select id="getSchTotalNum" resultType="int">
+		SELECT count(1) FROM
+		school
+	</select>
+	<insert id="addSchool" parameterType="School" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO school(
+		id
+		,name
+		,province
+		,city
+		,area
+		,addTime
+		,nature
+		,kind
+		,address
+		)
 		VALUES(
-				#{id}
-			  , #{name}
-			  , #{province}
-			  , #{city}
-			  , #{area}
-			  , #{addTime}
+		#{id}
+		, #{name}
+		, #{province}
+		, #{city}
+		,
+		#{area}
+		, #{addTime}
+		, #{nature}
+		, #{kind}
+		, #{address}
 
-			)
-    </insert>
-    
-    <!-- 获取符合条件的学校信息 -->
-    <select id="getSomeSchool" parameterType="School" resultMap="schoolMap">
-        SELECT s.id,s.name,c.id as cId,c.name as cName,m.id as mId,m.name as mName
-        FROM school AS s 
-        LEFT JOIN college AS c ON c.schoolId = s.id
-        LEFT JOIN major AS m ON c.id = m.collegeId 
-        where s.province = #{province} and s.city = #{city} and s.area = #{area}
-        ORDER BY s.id 
-    </select> 
-    
-    <resultMap type="School" id="schoolMap">  
-        <id column="id" property="id"/>  
-        <result column="name" property="name"/>  
-        <collection property="colleges" ofType="college" column="schoolId">  
-            <id column="cId" property="id"/>  
-            <result column="cName" property="name"/> 
-            <collection property="majors" ofType="major" column="collegeId">  
-            <id column="mId" property="id"/>  
-            <result column="mName" property="name"/> 
-        	</collection>
-        </collection>  
-    </resultMap>  
-    <select id="checkColExit" parameterType="College" resultType="College">  
-        SELECT id FROM college WHERE schoolId = #{schoolId} AND name = #{name}
-    </select>
-    <insert id="addCollege" parameterType="College" useGeneratedKeys="true" keyProperty="id">
-    	INSERT INTO college(
-				id
-			  ,name
-			  ,schoolId
-			  ,addTime
-			)
+		)
+	</insert>
+
+	<!-- 获取符合条件的学校信息 -->
+	<select id="getSomeSchool" parameterType="School" resultMap="schoolMap">
+		SELECT s.id,s.name,c.id as cId,c.name as cName,m.id as mId,m.name as
+		mName
+		FROM school AS s
+		LEFT JOIN college AS c ON c.schoolId = s.id
+		LEFT
+		JOIN major AS m ON c.id = m.collegeId
+		where s.province = #{province}
+		and s.city = #{city} and s.area = #{area}
+		ORDER BY s.id
+	</select>
+
+	<resultMap type="School" id="schoolMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<collection property="colleges" ofType="college" column="schoolId">
+			<id column="cId" property="id" />
+			<result column="cName" property="name" />
+			<collection property="majors" ofType="major" column="collegeId">
+				<id column="mId" property="id" />
+				<result column="mName" property="name" />
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="checkColExit" parameterType="College" resultType="College">
+		SELECT id FROM college WHERE schoolId = #{schoolId} AND name = #{name}
+	</select>
+	<insert id="addCollege" parameterType="College"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO college(
+		id
+		,name
+		,schoolId
+		,addTime
+		)
 		VALUES(
-				#{id}
-			  , #{name}
-			  , #{schoolId}
-			  , #{addTime}
-			)
-    </insert>
-    
-    <select id="getCollege" parameterType="int" resultType="College">  
-        SELECT id,name FROM college WHERE schoolId = #{schoolId} 
-    </select>
-    
-    <!-- 获取某个学校的学院专业 -->
-    <select id="getColAndMaj" parameterType="School" resultMap="CollegeMap">
-        SELECT c.id ,c.name,m.name as mName,m.id as mId
-        FROM college AS c 
-        LEFT JOIN major AS m ON c.id = m.collegeId 
-        where c.schoolId = #{id}
-        ORDER BY c.id , m.id
-    </select> 
-    
-    <resultMap type="College" id="CollegeMap">  
-        <id column="id" property="id"/>  
-        <result column="name" property="name"/>  
-        <collection property="majors" ofType="major" column="collegeId">  
-        	<id column="mId" property="id"/>  
-            <result column="mName" property="name"/> 
-        </collection>  
-    </resultMap>  
-    <select id="checkMajExit" parameterType="Major" resultType="Major">  
-        SELECT id FROM major WHERE collegeId = #{collegeId} AND name = #{name}
-    </select>
-    <insert id="addMajor" parameterType="Major" useGeneratedKeys="true" keyProperty="id">
-    	INSERT INTO major(
-				id
-			  ,name
-			  ,collegeId
-			  ,addTime
-			)
+		#{id}
+		, #{name}
+		, #{schoolId}
+		, #{addTime}
+		)
+	</insert>
+
+	<select id="getCollege" parameterType="int" resultType="College">
+		SELECT
+		id,name FROM college WHERE schoolId = #{schoolId}
+	</select>
+
+	<!-- 获取某个学校的学院专业 -->
+	<select id="getColAndMaj" parameterType="School" resultMap="CollegeMap">
+		SELECT c.id ,c.name,m.name as mName,m.id as mId
+		FROM college AS c
+		LEFT
+		JOIN major AS m ON c.id = m.collegeId
+		where c.schoolId = #{id}
+		ORDER BY
+		c.id , m.id
+	</select>
+
+	<resultMap type="College" id="CollegeMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<collection property="majors" ofType="major" column="collegeId">
+			<id column="mId" property="id" />
+			<result column="mName" property="name" />
+		</collection>
+	</resultMap>
+	<select id="checkMajExit" parameterType="Major" resultType="Major">
+		SELECT id FROM major WHERE collegeId = #{collegeId} AND name = #{name}
+	</select>
+	<insert id="addMajor" parameterType="Major" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO major(
+		id
+		,name
+		,collegeId
+		,addTime
+		)
 		VALUES(
-				#{id}
-			  , #{name}
-			  , #{collegeId}
-			  , #{addTime}
+		#{id}
+		,
+		#{name}
+		, #{collegeId}
+		, #{addTime}
+		)
+	</insert>
+	<delete id="delMajor" parameterType="int">
+		DELETE FROM major WHERE id =
+		#{id}
+	</delete>
+
+	<delete id="delCollege" parameterType="int">
+		DELETE FROM college WHERE
+		id = #{id}
+	</delete>
+
+	<update id="updateCollege" parameterType="College">
+		UPDATE college SET name
+		= #{name} WHERE id = #{id}
+	</update>
+
+	<update id="changeSName" parameterType="School">
+		UPDATE school SET name = #{name} 
+		, address = #{address}
+		, nature = #{nature}
+		, kind = #{kind}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delSchool" parameterType="int">
+		DELETE FROM school WHERE id
+		= #{id}
+	</delete>
+
+	<select id="getSomeSchByPage" parameterType="School" resultType="School">
+		SELECT * FROM school
+		<where>
+			<if test="province != '全部'">
+				province = #{province}
+			</if>
+			<if test="city != '全部'">
+				AND city = #{city}
+			</if>
+			<if test="area != '全部'">
+				AND area = #{area}
+			</if>
+			<if test="nature != 0">
+				AND nature = #{nature}
+			</if>
+			<if test="kind != 0">
+				AND kind = #{kind}
+			</if>
+			<if test="name != ''">
+				AND name = #{name}
+			</if>
+		</where>
+		LIMIT #{start},#{len}
+	</select>
+	<select id="getSomeSchNum" parameterType="School" resultType="int">
+		SELECT count(1) FROM school
+		<where>
+			<if test="province != '全部'">
+				province = #{province}
+			</if>
+			<if test="city != '全部'">
+				AND city = #{city}
+			</if>
+			<if test="area != '全部'">
+				AND area = #{area}
+			</if>
+			<if test="name != ''">
+				AND name = #{name}
+			</if>
+		</where>
+	</select>
+
+	<select id="checkSchExit" parameterType="School" resultType="School">
+		SELECT id FROM school
+		WHERE province = #{province} AND city = #{city}
+		AND area = #{area}
+		AND name = #{name}
+	</select>
+
+	<insert id="batchImport" parameterType="List">
+		INSERT INTO school(
+		name
+		,province
+		,city
+		,area
+		,addTime
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.name}
+			, #{item.province}
+			, #{item.city}
+			, #{item.area}
+			, #{item.addTime}
 			)
-    </insert>
-    <delete id="delMajor" parameterType="int">
-    	DELETE FROM major WHERE id = #{id}
-    </delete>
-    
-    <delete id="delCollege" parameterType="int">
-    	DELETE FROM college WHERE id = #{id}
-    </delete>
-    
-    <update id="updateCollege" parameterType="College">
-    	UPDATE college SET name = #{name} WHERE id = #{id}
-    </update>
-    
-    <update id="changeSName" parameterType="School">
-    	UPDATE school SET name = #{name} WHERE id = #{id}
-    </update>
-    
-    <delete id="delSchool" parameterType="int">
-    	DELETE FROM school WHERE id = #{id}
-    </delete>
-    
-    <select id="getSomeSchByPage" parameterType="School" resultType="School">  
-        SELECT * FROM school 
-        <where>
-        <if test="province != '全部'">
-        	province = #{province}
-        </if>
-        <if test="city != '全部'">
-        	AND city = #{city}
-        </if>
-        <if test="area != '全部'">
-        	AND area = #{area}
-        </if>
-        <if test="name != ''">
-        	AND name = #{name}
-        </if>
-        </where>
-        LIMIT #{start},#{len} 
-    </select>
-    <select id="getSomeSchNum" parameterType="School" resultType="int">  
-        SELECT count(1) FROM school 
-        <where>
-        <if test="province != '全部'">
-        	province = #{province}
-        </if>
-        <if test="city != '全部'">
-        	AND city = #{city}
-        </if>
-        <if test="area != '全部'">
-        	AND area = #{area}
-        </if>
-        <if test="name != ''">
-        	AND name = #{name}
-        </if>
-        </where>
-    </select>
-    
-    <select id="checkSchExit" parameterType="School" resultType="School">  
-        SELECT id FROM school
-        WHERE province = #{province} AND city = #{city} AND area = #{area}
-        AND name = #{name}
-    </select>
+		</foreach>
+	</insert>
 </mapper>
 
   
