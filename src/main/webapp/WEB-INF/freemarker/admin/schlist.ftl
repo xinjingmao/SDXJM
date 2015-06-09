@@ -38,7 +38,7 @@
 	</tbody>
 </table>
 <#else>
-    <p>no recores</p>
+    <p>抱歉，没有找到你需要的资源!</p>
 </#if>
 <p class="page navigator u_content"></p>
 <div class="hide navigatorJson">${(summary.navigator.htmlJson)!''}</div>
