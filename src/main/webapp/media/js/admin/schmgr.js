@@ -159,6 +159,14 @@ var schmgr = {
 		$("body").on("click",".delsch",function(){
 			schmgr.delSchool($(this).attr("id"));
 		});
+		
+		$("body").on("click",".schEdit",function(){
+			schmgr.schEdit($(this).attr("id"));
+		});
+		
+		$("body").on("click",".schBack",function(){
+			schmgr.schBack($(this).attr("id"));
+		});
 
 		window.addEventListener("resize", function(){
 			if($("#my_shade").css("display") == "block"){
@@ -312,6 +320,34 @@ var schmgr = {
 		
 	},
 	
+	schEdit : function(id){
+		var Num = id.replace("schEdit","");
+		$("#sN"+Num).prop("readonly",false);
+		$("#sA"+Num).prop("readonly",false);
+		$("#lNa"+Num).hide();
+		$("#sNa"+Num).show();
+		$("#lK"+Num).hide();
+		$("#sK"+Num).show();
+		$("#schEdit"+Num).hide();
+		$("#schBack"+Num).show();
+		$("#delSch"+Num).hide();
+		$("#"+Num).show();
+	},
+	
+	schBack : function(id){
+		var Num = id.replace("schBack","");
+		$("#sN"+Num).prop("readonly",true);
+		$("#sA"+Num).prop("readonly",true);
+		$("#lNa"+Num).show();
+		$("#sNa"+Num).hide();
+		$("#lK"+Num).show();
+		$("#sK"+Num).hide();
+		$("#schEdit"+Num).show();
+		$("#schBack"+Num).hide();
+		$("#delSch"+Num).show();
+		$("#"+Num).hide();
+	},
+	
 	updateSchool : function(id){
 		var res = confirm("确认更该学校属性？");
 		if(res == false){
@@ -325,13 +361,26 @@ var schmgr = {
 		            ].join("");
 		$.post("/sch/updateSchool", data, function(result) {
 			alert(result.message);
+			$("#lNa"+id).text($("#sNa"+id).find("option:selected").text());
+			$("#lK"+id).text($("#sK"+id).find("option:selected").text());
+			$("#sN"+id).prop("readonly",true);
+			$("#sA"+id).prop("readonly",true);
+			$("#lNa"+id).show();
+			$("#sNa"+id).hide();
+			$("#lK"+id).show();
+			$("#sK"+id).hide();
+			$("#schEdit"+id).show();
+			$("#schBack"+id).hide();
+			$("#delSch"+id).show();
+			$("#"+id).hide();
 		},"json");
 	},
 	
 	delSchool : function(id){
+		var Num = id.replace("delSch","");
 		var f = confirm('确认删除此学校？');
 		if(f == true){
-			$.post("/sch/delSch",id,function(result){
+			$.post("/sch/delSch","id=" + Num,function(result){
 				schmgr.getAllschool();
   	  		});
 		}else

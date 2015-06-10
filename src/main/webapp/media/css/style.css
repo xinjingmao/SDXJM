@@ -944,3 +944,13 @@ endColorstr='#f16c7c');
 .table_style>thead{
 	background-color: #dff0d8;
 }
+.list_none{
+	display: none;
+}
+.list_block{
+	display: block;
+}
+.schEdit,.delsch{
+	float:left;
+	margin-left:5px;
+}

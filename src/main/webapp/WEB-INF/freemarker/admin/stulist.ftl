@@ -7,7 +7,6 @@
 	<thead>
 	    <tr>
 	        <th>序列号</th>
-	        <th>ID</th>
 			<th>名字</th>
 			<th>性别</th>
 			<th>手机号码</th>
@@ -31,7 +30,6 @@
     	<#list summary.stuList as stu>
 	       <tr>
 	       	<td>${stu_index + 1}</td>
-	        <td>${stu.id}</td>
 	        <td>${stu.name}</td>
 	        <td><#if stu.sex == 0>男<#else>女</#if></td>
 	        <td>${stu.tel}</td>
